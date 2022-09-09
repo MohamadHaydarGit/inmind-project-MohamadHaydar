@@ -1,0 +1,95 @@
+@import "~flag-icon-css/css/flag-icons.css";
+
+.flag-icon{
+  width: 10em;
+  height: 10em;
+}
+#bordering-countries{
+  .flag-icon{
+    width: 3em;
+    height:3em;
+  }
+  display: flex;
+  justify-content: flex-start;
+}
+.couple{
+  display: flex;
+  align-content: center;
+  align-items: center;
+
+}
+
+#content {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: minmax(50px, auto);
+  max-width: 540px;
+  margin: 0 auto;
+  grid-gap: 20px;
+  grid-template-areas:
+  "title"
+  "flag"
+  "details"
+  "bordering"
+  "gallery";
+
+}
+
+#title {
+  display: flex;
+  justify-content: center;
+  grid-area: title;
+}
+
+#flag {
+  display: flex;
+  justify-content: center;
+  grid-area: flag;
+}
+
+#details {
+  grid-area: details;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#bordering {
+  grid-area: bordering;
+}
+
+#gallery {
+  grid-area: gallery;
+}
+
+
+@media screen and (min-width: 1200px) {
+  #content {
+    max-width: 1100px;
+    margin: 0 auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+  "flag title"
+  "flag details"
+  "bordering bordering"
+  "gallery gallery";
+
+  }
+  #title {
+
+    justify-content: flex-start;
+  }
+  #flag{
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+  }
+  .flag-icon{
+    scale:1;
+    width: 12em;
+  }
+
+
+}
+

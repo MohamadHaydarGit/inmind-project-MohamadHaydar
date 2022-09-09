@@ -1,0 +1,27 @@
+
+@import "~flag-icon-css/css/flag-icons.css";
+
+
+.flex-container{
+
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+}
+.container{
+
+  margin-bottom: 20px;
+}
+.flag-icon{
+  scale: 3;
+}
+
+.country-name{
+  font-size: 1.4em;
+}
+
+.card{
+  padding: 0 20px;
+}

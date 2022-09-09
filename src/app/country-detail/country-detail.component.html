@@ -1,0 +1,28 @@
+<app-navigation></app-navigation>
+<main *ngIf="country" id="content">
+    <div id="title">
+      <h2>{{country.name}}</h2>
+    </div>
+  <div id="flag">
+    <span class="flag-icon flag-icon-{{country.topLevelDomain}}"></span>
+  </div>
+  <div id="details">
+    <p>Capital City : {{country.capital}}</p>
+    <p>Currency :{{country.currency}}</p>
+    <p>Language :{{country.language}}</p>
+    <p>Continent :{{country.continent}}</p>
+    <p>Regional Bloc :{{country.regionalBloc}}</p>
+
+  </div>
+  <div id="bordering">
+  <h2>Bordering Countries :</h2>
+    <div id="bordering-countries">
+      <div *ngFor="let border of borders" class="couple" (click)="onSelect(border)"><span class="flag-icon flag-icon-{{border.topLevelDomain}}"></span>{{border.name}}</div>
+    </div>
+  </div>
+  <div id="gallery">
+    <h2>Gallery :</h2>
+
+  </div>
+</main>
+

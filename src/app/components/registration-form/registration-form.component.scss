@@ -1,0 +1,57 @@
+
+.flex-container{
+  max-width: 90%;
+  margin: 0 auto;
+
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: flex-start;
+
+}
+.input-group{
+}
+.title{
+  text-align: center;
+}
+
+.input-group-text{
+  background-color: white;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: black;
+}
+
+  .input-group-text:focus{
+    border-color: black;
+  }
+
+  .btn{
+    width: 100%;
+  }
+
+  a{
+    color:#1676F3;
+    cursor: pointer;
+  }
+
+
+
+@media screen and (min-width: 830px) {
+  .flex-container{
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+
+  .img-fluid{
+    width: 60%;
+  }
+
+
+}

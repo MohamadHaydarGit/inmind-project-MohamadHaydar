@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "name": "Lebanon",
+    "capital": "Beirut",
+    "currency": "Lebanese pound",
+    "language":  [
+       "Arabic",
+       "French"
+    ],
+    "continent": "Asia",
+    "regionalBloc": "Arab League",
+    "topLevelDomain": "lb",
+    "borders": [
+      "Syria"
+    ],
+    "region": "Asia"
+  },
+  {
+    "id": 2,
+    "name": "Syria",
+    "capital": "Damascus",
+    "currency": "Syrian pound",
+    "language": "Arabic",
+    "continent": "Asia",
+    "regionalBloc": "Arab League",
+    "topLevelDomain": "sy",
+    "borders": [
+      "Lebanon"
+    ],
+    "region": "Asia"
+  },
+
+  {
+    "id": 3,
+    "name": "Kuwait",
+    "capital": "Kuwait City",
+    "currency": "Kuwaiti dinar",
+    "language": "Arabic",
+    "continent": "Asia",
+    "regionalBloc": "Arab League",
+    "topLevelDomain": "kw",
+    "region": "Asia"
+  }
+
+]

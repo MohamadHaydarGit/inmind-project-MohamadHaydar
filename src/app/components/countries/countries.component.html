@@ -1,0 +1,23 @@
+<app-navigation></app-navigation>
+
+<app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search>
+
+<h2>{{errorMsg}}</h2>
+
+<div class="container"  *ngFor="let country of countries">
+  <div class="card" *ngIf="searchText === '' || country.name.toLowerCase().includes(searchText.toLowerCase())">
+    <div class="flex-container">
+    <div class="">
+      <span class="flag-icon flag-icon-{{country.topLevelDomain}}"></span>
+    </div>
+    <div class="country-name">
+      {{country.name}}
+    </div>
+    <div class="">
+      <button class="btn btn-secondary" (click)="onSelect(country)">View Details</button>
+    </div>
+    </div>
+  </div>
+</div>
+
+
