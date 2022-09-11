@@ -16,10 +16,12 @@
   </div>
   <div id="bordering">
   <h2>Bordering Countries :</h2>
-    <div id="bordering-countries">
+    <div *ngIf="country.borders; else Noborders " id="bordering-countries">
       <div *ngFor="let border of borders" class="couple" (click)="onSelect(border)"><span *ngIf="border.tld" class="flag-icon flag-icon-{{border.tld[0].slice(1)}}"></span>
         <div class="border-name">{{border.name.common}}</div></div>
     </div>
+    <ng-template #Noborders><p>{{country.name.common+' does not border any country'}}</p></ng-template>
+
   </div>
   <div id="gallery">
     <h2>Gallery :</h2>
