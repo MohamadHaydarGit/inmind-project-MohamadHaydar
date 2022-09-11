@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
-import {CountryService} from "./country.service";
+import {CountryService} from "../../services/coutry-service/country.service";
+import {withLatestFrom} from "rxjs/operators";
+import {forkJoin} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +13,9 @@ export class CountryDetailsResolverService implements Resolve<any>{
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
-    return this.countryService.getCountry();
+    return forkJoin([
+       this.countryService.getCountry(<string>route.paramMap.get('code')),
+       this.countryService.getBoundaries(route.queryParams.borders),
+    ]);
   }
 }

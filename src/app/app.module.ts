@@ -14,8 +14,9 @@ import { CountriesComponent } from './components/countries/countries.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
 import { SearchComponent } from './components/search/search.component';
-import { CountryDetailComponent } from './country-detail/country-detail.component';
-import { NavigationComponent } from './navigation/navigation.component';
+import { CountryDetailComponent } from './components/country-detail/country-detail.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { KeysPipe } from './pipes/keys.pipe';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NavigationComponent } from './navigation/navigation.component';
     SearchComponent,
     CountryDetailComponent,
     NavigationComponent,
+    KeysPipe,
 
   ],
   imports: [

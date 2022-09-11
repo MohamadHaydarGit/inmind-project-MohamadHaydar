@@ -5,13 +5,23 @@
 <h2>{{errorMsg}}</h2>
 
 <div class="container"  *ngFor="let country of countries">
-  <div class="card" *ngIf="searchText === '' || country.name.toLowerCase().includes(searchText.toLowerCase())">
+  <div class="card" *ngIf="(searchText === '' || country.name.common.toLowerCase().includes(searchText.toLowerCase()) )&& country.name.common.toLowerCase()!='israel'">
     <div class="flex-container">
     <div class="">
-      <span class="flag-icon flag-icon-{{country.topLevelDomain}}"></span>
+<!--      <span *ngIf="country.tld" class="flag-icon flag-icon-{{country.tld[0].slice(1)}}"></span>-->
+      <div *ngIf="country.tld && country.tld[0]=='.uk'; then thenBlock; else elseBlock "></div>
+
+      <ng-template #thenBlock>
+        <span class="flag-icon flag-icon-gb"></span>
+      </ng-template>
+
+      <ng-template #elseBlock>
+        <span *ngIf="country.tld" class="flag-icon flag-icon-{{country.tld[0].slice(1)}}"></span>
+      </ng-template>
+
     </div>
     <div class="country-name">
-      {{country.name}}
+      {{country.name.common}}
     </div>
     <div class="">
       <button class="btn btn-secondary" (click)="onSelect(country)">View Details</button>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Country} from "../../country";
-import {CountryService} from "../../country.service";
+import {Country} from "../../models/country";
+import {CountryService} from "../../services/coutry-service/country.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -32,7 +32,7 @@ export class CountriesComponent implements OnInit {
 
 
   onSelect(country: Country){
-    this.router.navigate([country.id], {relativeTo: this.route});
+    this.router.navigate([country.cca3],{relativeTo: this.route,queryParams:{borders:country.borders},});
   }
 
 

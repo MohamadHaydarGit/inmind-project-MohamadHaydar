@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
-import {CountryService} from "./country.service";
+import {CountryService} from "../../services/coutry-service/country.service";
 import {Observable} from "rxjs";
 
 @Injectable({

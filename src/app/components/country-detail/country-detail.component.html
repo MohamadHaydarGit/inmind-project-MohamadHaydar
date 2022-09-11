@@ -1,0 +1,29 @@
+<app-navigation></app-navigation>
+<main *ngIf="country" id="content">
+    <div id="title">
+      <h2>{{country!.name.common}}</h2>
+    </div>
+  <div id="flag">
+    <span *ngIf="country!.tld" class="flag-icon flag-icon-{{country!.tld[0].slice(1)}}"></span>
+  </div>
+  <div id="details">
+    <p>Capital City : {{country!.capital}}</p>
+    <p>Currency : <span *ngFor="let curr of country!.currencies! | keys">{{curr.name+' '}}</span></p>
+    <p>Language :<span *ngFor="let lang of country!.languages | keyvalue">{{lang.value+' '}}</span></p>
+    <p>Continent :{{country!.continents}}</p>
+<!--    <p>Regional Bloc :{{country!.regionalBloc}}</p>-->
+
+  </div>
+  <div id="bordering">
+  <h2>Bordering Countries :</h2>
+    <div id="bordering-countries">
+      <div *ngFor="let border of borders" class="couple" (click)="onSelect(border)"><span *ngIf="border.tld" class="flag-icon flag-icon-{{border.tld[0].slice(1)}}"></span>
+        <div class="border-name">{{border.name.common}}</div></div>
+    </div>
+  </div>
+  <div id="gallery">
+    <h2>Gallery :</h2>
+
+  </div>
+</main>
+

@@ -1,21 +1,32 @@
-@import "~flag-icon-css/css/flag-icons.css";
+@import "../../../../node_modules/flag-icon-css/css/flag-icons.css";
+.border-name{
+  display: inline-block;
+  padding-left:10px ;
+  padding-right: 30px;
 
+}
 .flag-icon{
   width: 10em;
-  height: 10em;
+  height: 9em;
+  box-shadow: 5px 10px 8px 10px #888888;
 }
 #bordering-countries{
   .flag-icon{
     width: 3em;
     height:3em;
+    box-shadow: none;
+
   }
   display: flex;
   justify-content: flex-start;
+  flex-wrap: wrap;
 }
 .couple{
   display: flex;
   align-content: center;
   align-items: center;
+  cursor: pointer;
+  margin-bottom: 20px;
 
 }
 

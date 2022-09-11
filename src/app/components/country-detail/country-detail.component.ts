@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
-import {Country} from "../country";
-import {CountryService} from "../country.service";
+import {Country} from "../../models/country";
+import {CountryService} from "../../services/coutry-service/country.service";
 
 @Component({
   selector: 'app-country-detail',
@@ -13,7 +13,7 @@ export class CountryDetailComponent implements OnInit {
   public countryId:any;
   public countries : Country[] = [];
   public errorMsg:string ='';
-  country:any;
+  country:Country | undefined;
   borders:Country[] = [];
 
 
@@ -21,12 +21,20 @@ export class CountryDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap)=>{
-       let id= parseInt(<string>params.get('id'));
-       this.countryId = id;
-      this.route.data.subscribe(response =>this.countries=response.country);
-      this.country= this.countries.find(c => c.id===this.countryId);
-      this.countryService.getBoundaries(this.country.id).subscribe(data => this.borders=data);
-    });
+       let code= params.get('code');
+       this.countryId = code;
+      this.route.data.subscribe(response => {
+
+        console.log(response['country'][0]);
+        this.countries = response['country'][0];
+        console.log(this.countries);
+        this.country= this.countries.find(c => c.cca3===this.countryId);
+        this.borders=response['country'][1];
+
+      });
+
+    //  this.countryService.getBoundaries(this.country!.borders).subscribe(data => this.borders=data);
+   });
 
 
 
@@ -35,7 +43,7 @@ export class CountryDetailComponent implements OnInit {
   }
 
   onSelect(border:Country){
-    this.router.navigate(['/countries', border.id]);
+   this.router.navigate(['/countries', border.cca3],{queryParams:{borders:border.borders},});
   }
 
   // getCountry(id: number){
