@@ -1,11 +1,11 @@
 <app-navigation></app-navigation>
 
-<app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search>
+<app-search (searchTextChanged)="onSearchTextEntered($event)" (selectRegionChange)="onSelectedRegion($event)" ></app-search>
 
 <h2>{{errorMsg}}</h2>
 
 <div class="container"  *ngFor="let country of countries">
-  <div class="card" *ngIf="(searchText === '' || country.name.common.toLowerCase().includes(searchText.toLowerCase()) )&& country.name.common.toLowerCase()!='israel'">
+  <div class="card" *ngIf="(searchText === '' || country.name.common.toLowerCase().includes(searchText.toLowerCase()))&& (country.name.common.toLowerCase()!='israel') && (country.region.toLowerCase()===selectedRegion.toLowerCase() || selectedRegion==='')">
     <div class="flex-container">
     <div class="">
 <!--      <span *ngIf="country.tld" class="flag-icon flag-icon-{{country.tld[0].slice(1)}}"></span>-->

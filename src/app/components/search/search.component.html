@@ -4,11 +4,12 @@
       Search
     </div>
     <div class="card-body">
-      <input type="text" [(ngModel)]="enteredSearchValue" (input)="onSearchTextChanged()">
+      <input id='country-search' type="text" placeholder="Search by country name" [(ngModel)]="enteredSearchValue" (input)="onSearchTextChanged()">
       <div class="flex-container">
         <div class="form-group">
-          <label for="exampleFormControlSelect1">Regions</label>
-          <select class="form-control" id="exampleFormControlSelect1">
+            <label for="exampleFormControlSelect1">Regions</label>
+          <select #Regions (change)="onSelectChange(Regions.value)" class="form-control" id="exampleFormControlSelect1">
+            <option value="">All Regions</option>
             <option value="Africa">Africa</option>
             <option value="Americas"> Americas</option>
             <option value="Asia">Asia</option>
@@ -16,7 +17,7 @@
             <option value="Oceania">Oceania</option>
           </select>
         </div>
-      <a href="#" class="btn btn-secondary">Search</a>
+
       </div>
 
 

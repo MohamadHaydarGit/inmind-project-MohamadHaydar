@@ -27,9 +27,14 @@ export class CountryService {
   }
 
   getBoundaries(codes: string[] | undefined): Observable<Country[]>{
-   return  this.http.get<Country[]>(this.ROOT_URL+'/alpha?codes='+codes).pipe(
-      catchError(this.handleError)
-    );
+    if (codes) {
+      return this.http.get<Country[]>(this.ROOT_URL + '/alpha?codes=' + codes).pipe(
+        catchError(this.handleError)
+      );
+    }
+    else{
+      return of([]);
+    }
  }
 
 
