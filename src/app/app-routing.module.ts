@@ -6,13 +6,16 @@ import {CountriesComponent} from "./components/countries/countries.component";
 import {CountriesResolverService} from "./resolvers/countries-resolver/countries-resolver.service";
 import {CountryDetailComponent} from "./components/country-detail/country-detail.component";
 import {CountryDetailsResolverService} from "./resolvers/countrie-details-resolver/country-details-resolver.service";
+import {AuthGuard} from "./guards/auth.guard";
+import {MainGuard} from "./guards/main.guard";
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: "full"},
   {path: 'registration', component: RegistrationFormComponent},
-  {path: 'login', component: LoginFormComponent},
-  {path: 'countries', component: CountriesComponent, resolve:{countries:CountriesResolverService}},
-  {path: 'countries/:code', component: CountryDetailComponent, resolve:{country: CountryDetailsResolverService}}
+  {path: 'login', component: LoginFormComponent, canActivate:[AuthGuard]},
+  {path: 'countries', component: CountriesComponent, resolve:{countries:CountriesResolverService}, canActivate:[MainGuard]},
+  {path: 'countries/:code', component: CountryDetailComponent, resolve:{country: CountryDetailsResolverService}},
+
 
   // {path: '**', component: PageNotFoundComponent},
 

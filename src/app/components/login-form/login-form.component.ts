@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl,Validators} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Router} from "@angular/router";
+import {AuthService} from "../../services/auth-service/auth.service";
+import {combineAll} from "rxjs/operators";
 
 @Component({
   selector: 'app-login-form',
@@ -18,6 +20,7 @@ export class LoginFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
     private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -53,12 +56,21 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit(formData : any) {
-    //TODO: Authentication
 
-    var name = formData['email'];
-    console.log(name);
-    console.log(formData['check']);
-    this.router.navigate(['/countries']);
+    this.authService.login(
+      {
+        Username: formData['email'],
+        Password: formData['password']
+      }
+    ).subscribe((success: boolean) => {
+        if (success) {
+          console.log("login success");
+          this.router.navigate(['/countries']);
+
+        }else{
+          alert("login failed");
+        }
+      });
 
   }
 

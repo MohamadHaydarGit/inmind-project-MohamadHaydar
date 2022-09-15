@@ -27,6 +27,7 @@
     "flag-icon-css": "^4.1.7",
     "flag-icons": "^6.6.6",
     "jquery": "^3.6.1",
+    "jwt-decode": "^3.1.2",
     "popper.js": "^1.16.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",

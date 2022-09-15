@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
 import {CountryService} from "../../services/coutry-service/country.service";
-import {Observable} from "rxjs";
+import {Observable, throwError} from "rxjs";
+import {catchError} from "rxjs/operators";
+import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,9 @@ export class CountriesResolverService implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
     console.log('Called Get Product in resolver...', route);
-    return this.countryService.getCountries();
+    return this.countryService.getCountries().pipe(
+      catchError((error:HttpErrorResponse) => {
+        return throwError(error.message || "Server Error");})
+    );
   }
 }

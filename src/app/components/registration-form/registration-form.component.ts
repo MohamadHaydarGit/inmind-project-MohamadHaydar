@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl,Validators} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Router, ActivatedRoute, ParamMap} from "@angular/router";
+import {AuthService} from "../../services/auth-service/auth.service";
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
@@ -17,6 +18,7 @@ export class RegistrationFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
     private router: Router,
+    private authService: AuthService
   ) {}
 
   checkIfEmpty (input : string) : boolean {
@@ -36,9 +38,24 @@ export class RegistrationFormComponent implements OnInit {
 
 
   onSubmit(formData : any) {
-    var name = formData['firstName'];
-    console.log(name);
-    this.router.navigate(['/login']);
+    this.authService.signup(
+      {
+        Firstname: formData['firstName'],
+        Lastname: formData['lastName'],
+        Email: formData['email'],
+        Password: formData['password'],
+        RoleName: formData['role']
+      }
+    ).subscribe((success: boolean) => {
+        if (success) {
+          console.log('success');
+          alert("account created");
+          this.router.navigate(['/login']);
+        }
+        else{
+          console.log("failed");
+        }
+      });
 
   }
 

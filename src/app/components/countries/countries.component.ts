@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Country} from "../../models/country";
-import {CountryService} from "../../services/coutry-service/country.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({

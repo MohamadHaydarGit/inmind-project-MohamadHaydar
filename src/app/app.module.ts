@@ -4,7 +4,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule,} from '@angular/forms';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +17,8 @@ import { SearchComponent } from './components/search/search.component';
 import { CountryDetailComponent } from './components/country-detail/country-detail.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { KeysPipe } from './pipes/keys.pipe';
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,11 @@ import { KeysPipe } from './pipes/keys.pipe';
     MatFormFieldModule,
     MatIconModule
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},   {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
