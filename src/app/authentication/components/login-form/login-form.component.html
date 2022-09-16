@@ -1,0 +1,83 @@
+<div class="flex-container">
+  <img src="../../../../assets/images/worldmap.jpg" class="img-fluid" alt="Responsive image">
+
+  <div class="container">
+    <h1 class="title">
+      {{title}}
+    </h1>
+    <h5 class="title">{{subTitle}}</h5>
+
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+
+
+      <div class="form-group">
+        <label for="email">Email address
+          <span class="text-danger" *ngIf="checkIfEmpty('email')">*</span>
+        </label>
+        <input type="email" class="form-control" id="email"
+               placeholder="Enter email" formControlName="email"
+               [class.valid]="checkIfValid('email')"
+               [class.invalid]="checkIfInvalid('email')"
+        />
+        <div *ngIf="email.invalid &&
+        email.errors &&
+        (email.touched || email.dirty)">
+          <small *ngIf="email.hasError('required')"
+                 class="text-danger">
+            This field is required.
+          </small>
+          <small class="text-danger"
+                 *ngIf="email.hasError('pattern')">
+            Invalid email format! should include <@> and a domain.
+          </small>
+        </div>
+      </div>
+
+      <label for="password">Password
+        <span class="text-danger" *ngIf="checkIfEmpty('password')">*</span>
+      </label>
+
+      <div class="form-group">
+        <div class="input-group">
+
+          <input #passwordInput type="password" class="form-control" id="password"
+                 placeholder="Enter password" formControlName="password"
+                 [class.valid]="checkIfValid('password')"
+                 [class.invalid]="checkIfInvalid('password')"
+          />
+
+          <div class="input-group-append" >
+            <span class="input-group-text border-left-0 " ><i [ngClass]="passwordInput.type=='password'?'bi bi-eye':'bi bi-eye-slash'" id="togglePassword" (click)="toggleVisibility(passwordInput)"></i></span>
+          </div>
+
+        </div>
+        <div  *ngIf="password.invalid &&
+        password.errors &&
+        (password.touched || password.dirty)">
+          <small *ngIf="password.hasError('required')"
+                 class="text-danger">
+            This field is required.
+          </small>
+          <small class="text-danger"
+                 *ngIf="password.hasError('minlength')">
+            The minimum length for this field is {{password.errors!.minlength.requiredLength}} characters.
+          </small>
+        </div>
+      </div>
+
+      <div class="form-check form-check-inline" style="margin-bottom: 10px;">
+        <input type="checkbox" class="form-check-input" id="remember-me" value="remember-me" formControlName="check">
+        <label class="form-check-label" for="remember-me">Remember me</label>
+      </div>
+
+
+
+      <div class="text-center">
+        <button class="btn btn-secondary" type="submit" [disabled]="formGroup.invalid">Log In</button>
+        <h5>Don't have an account? <a routerLink="/authentication/registration">Sign Up</a></h5>
+      </div>
+
+    </form>
+  </div>
+
+</div>

@@ -1,0 +1,44 @@
+
+@import "../../../../../node_modules/flag-icon-css/css/flag-icons.css";
+
+
+.flex-container{
+
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+}
+.container{
+
+  margin-bottom: 20px;
+}
+.flag-icon{
+  scale: 3;
+}
+
+.country-name{
+  font-size: 1.4rem;
+}
+
+.card{
+  padding: 0 20px;
+}
+
+@media screen and (max-width: 800px){
+  .btn{
+    padding: 5px;
+    font-size: 0.5rem;
+
+  }
+  .country-name{
+    font-size: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 30%;
+    text-align: center;
+
+  }
+
+}
