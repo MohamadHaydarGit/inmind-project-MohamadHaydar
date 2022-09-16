@@ -9,7 +9,7 @@ const routes: Routes = [
     path: 'authentication',
     loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule)
   },
-  {path: 'orders', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)},
+
 
   {path: 'countries', loadChildren: () => import('./countries/countries.module').then(m => m.CountriesModule)},
   // {path: '**', component: PageNotFoundComponent},
