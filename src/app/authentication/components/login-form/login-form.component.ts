@@ -15,6 +15,7 @@ export class LoginFormComponent implements OnInit {
   title = "Log in to your Account";
   subTitle = "Welcome back please enter your details";
   formGroup : any;
+  username : string= '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,8 +25,13 @@ export class LoginFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem("username")){
+      // @ts-ignore
+      this.username = localStorage.getItem("username");
+    }
+
     this.formGroup = this.formBuilder.group({
-      email: ['',[Validators.required,Validators.pattern(/^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i)]],
+      email: [this.username,[Validators.required,Validators.pattern(/^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i)]],
       password: ['',[Validators.required, Validators.minLength(8)]],
       check:'',
       terms: false
@@ -64,6 +70,10 @@ export class LoginFormComponent implements OnInit {
       }
     ).subscribe((success: boolean) => {
         if (success) {
+          localStorage.removeItem('username');
+          if(formData['check']){
+            localStorage.setItem('username',formData['email']);
+          }
           console.log("login success");
           this.router.navigate(['/countries/list']);
 

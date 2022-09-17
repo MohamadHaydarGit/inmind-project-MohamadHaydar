@@ -46,12 +46,14 @@
                  [class.invalid]="checkIfInvalid('password')"
           />
 
-          <div class="input-group-append" >
-            <span class="input-group-text border-left-0 " ><i [ngClass]="passwordInput.type=='password'?'bi bi-eye':'bi bi-eye-slash'" id="togglePassword" (click)="toggleVisibility(passwordInput)"></i></span>
+          <div class="input-group-append">
+            <span class="input-group-text border-left-0 "><i
+              [ngClass]="passwordInput.type=='password'?'bi bi-eye':'bi bi-eye-slash'" id="togglePassword"
+              (click)="toggleVisibility(passwordInput)"></i></span>
           </div>
 
         </div>
-        <div  *ngIf="password.invalid &&
+        <div *ngIf="password.invalid &&
         password.errors &&
         (password.touched || password.dirty)">
           <small *ngIf="password.hasError('required')"
@@ -69,7 +71,6 @@
         <input type="checkbox" class="form-check-input" id="remember-me" value="remember-me" formControlName="check">
         <label class="form-check-label" for="remember-me">Remember me</label>
       </div>
-
 
 
       <div class="text-center">

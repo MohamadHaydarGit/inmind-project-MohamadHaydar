@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {config, Observable, of} from "rxjs";
+import {config, Observable, of, throwError} from "rxjs";
 import {catchError, mapTo, tap} from "rxjs/operators";
 import {Login, Tokens} from "../../../models/token";
 import {SignUp} from "../../../models/signup";
 import jwt_decode from 'jwt-decode';
+import {User} from "../../../models/user";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
 
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
-  private loggedUser: string ='';
+  private loggedUser: User | undefined;
   private readonly ROOT_URL = 'http://localhost:5005/api/User';
 
   constructor(private http: HttpClient) {}
@@ -98,8 +99,16 @@ export class AuthService {
   }
 
   private doLoginUser(username: string, tokens: Tokens) {
-    this.loggedUser = username;
     this.storeTokens(tokens);
+  }
+
+  private getProfile(){
+    return this.http.get<any>(this.ROOT_URL+'/GetProfile()').pipe(
+      catchError(this.handleError));
+  }
+
+  private handleError<T>(error: HttpErrorResponse) {
+    return throwError(error.message || "Server Error");
   }
 
   public doLogoutUser() {
