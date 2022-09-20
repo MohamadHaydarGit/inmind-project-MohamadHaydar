@@ -124,7 +124,7 @@
 
     <div class="form-group">
       <label for="role">Role</label>
-      <select class="form-control" id="role" formControlName="role">
+      <select class="form-control" id="role" formControlName="role" (change)="change()">
         <option value="user">User</option>
         <option value="admin">Admin</option>
       </select>

@@ -1,0 +1,24 @@
+<table *ngIf="filteredArray || filteredArray==[]">
+  <tr *ngFor="let i of rowIndexArray">
+    <td>
+      <div class="imagebox"  *ngIf="filteredArray[3*i]">
+        <img [src]="filteredArray[3*i].imageUrl" class="img-fluid">
+        <span class="imagebox-desc">{{filteredArray[3 * i].caption}}</span>
+      </div>
+    </td>
+    <td>
+      <div class="imagebox" *ngIf="filteredArray[3*i+1]">
+        <img [src]="filteredArray[3*i+1].imageUrl" class="img-fluid">
+        <span class="imagebox-desc">{{filteredArray[3 * i + 1].caption}}</span>
+      </div>
+    </td>
+    <td>
+      <div class="imagebox" *ngIf="filteredArray[3*i+2]">
+        <img [src]="filteredArray[3*i+2].imageUrl" class="img-fluid">
+        <span class="imagebox-desc">{{filteredArray[3 * i + 2].caption}}</span>
+      </div>
+    </td>
+
+  </tr>
+
+</table>

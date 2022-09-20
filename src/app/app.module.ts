@@ -6,6 +6,7 @@ import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {TokenInterceptor} from "./authentication/token.interceptor";
+import {NgxPermissionsModule} from "ngx-permissions";
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import {TokenInterceptor} from "./authentication/token.interceptor";
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    NgxPermissionsModule.forRoot(),
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},{
     provide: HTTP_INTERCEPTORS,

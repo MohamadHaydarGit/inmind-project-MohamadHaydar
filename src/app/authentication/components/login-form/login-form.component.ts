@@ -3,6 +3,7 @@ import {FormBuilder, FormControl,Validators} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth-service/auth.service";
+import {NgxPermissionsService} from "ngx-permissions";
 
 
 @Component({
@@ -21,7 +22,8 @@ export class LoginFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+
   ) { }
 
   ngOnInit(): void {
@@ -75,6 +77,7 @@ export class LoginFormComponent implements OnInit {
             localStorage.setItem('username',formData['email']);
           }
           console.log("login success");
+
           this.router.navigate(['/countries/list']);
 
         }else{

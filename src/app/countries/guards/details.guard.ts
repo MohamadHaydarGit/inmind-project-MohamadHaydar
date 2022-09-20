@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import {CanActivate, Router} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import { Observable } from 'rxjs';
 import {AuthService} from "../../authentication/services/auth-service/auth.service";
 import {NgxPermissionsService} from "ngx-permissions";
 
 @Injectable({
   providedIn: 'root'
 })
-export class MainGuard implements CanActivate {
+export class DetailsGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router,private ngxPermissionsService: NgxPermissionsService) { }
 
   canActivate() {
@@ -23,4 +24,5 @@ export class MainGuard implements CanActivate {
     }
     return this.authService.isLoggedIn();
   }
+
 }

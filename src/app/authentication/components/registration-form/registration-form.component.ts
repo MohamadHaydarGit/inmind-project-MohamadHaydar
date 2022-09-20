@@ -38,27 +38,52 @@ export class RegistrationFormComponent implements OnInit {
 
 
   onSubmit(formData : any) {
-    this.authService.signup(
-      {
-        Firstname: formData['firstName'],
-        Lastname: formData['lastName'],
-        Email: formData['email'],
-        Password: formData['password'],
-        RoleName: formData['role']
-      }
-    ).subscribe((success: boolean) => {
+    if(formData['role'] == 'user') {
+      this.authService.signup(
+        {
+          Firstname: formData['firstName'],
+          Lastname: formData['lastName'],
+          Email: formData['email'],
+          Password: formData['password'],
+          RoleName: formData['role']
+        }
+      ).subscribe((success: boolean) => {
         if (success) {
           console.log('success');
           alert("account created");
-          this.router.navigate(['/authenticate/login']);
-        }
-        else{
+          this.router.navigate(['/authentication/login']);
+        } else {
           console.log("failed");
         }
       });
+    }
+    else{
+      console.log("admin");
+      this.authService.createAdmin(
+
+        {
+          Firstname: formData['firstName'],
+          Lastname: formData['lastName'],
+          Email: formData['email'],
+          Password: formData['password'],
+          RoleName: formData['role']
+        }
+      ).subscribe((success: boolean) => {
+        if (success) {
+          console.log('success');
+          alert("account created");
+          this.router.navigate(['/authentication/login']);
+        } else {
+          console.log("failed");
+        }
+      });
+    }
 
   }
 
+  change(){
+    console.log(this.formGroup.value['role']);
+  }
   toggleVisibility(PasswordInput : any){
     if(PasswordInput.type == "password"){
       PasswordInput.type="text";

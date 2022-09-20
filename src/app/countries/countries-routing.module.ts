@@ -5,6 +5,9 @@ import {CountryDetailComponent} from "./components/country-detail/country-detail
 import {CountryDetailsResolverService} from "../resolvers/countrie-details-resolver/country-details-resolver.service";
 import {CountriesResolverService} from "../resolvers/countries-resolver/countries-resolver.service";
 import {MainGuard} from "./guards/main.guard";
+import {DetailsGuard} from "./guards/details.guard";
+import {ImageComponent} from "./components/country-detail/image/image.component";
+import {ImageListComponent} from "./components/country-detail/image-list/image-list.component";
 
 const routes: Routes = [
   {
@@ -13,7 +16,15 @@ const routes: Routes = [
     resolve: {countries: CountriesResolverService},
     canActivate: [MainGuard]
   },
-  {path: 'details/:code', component: CountryDetailComponent, resolve: {country: CountryDetailsResolverService}},
+  {path: 'details/:code',
+    component: CountryDetailComponent,
+    resolve: {country: CountryDetailsResolverService},
+    canActivate: [DetailsGuard],
+    children:[
+      {path:'upload',component:ImageComponent},
+      {path:'list',component:ImageListComponent}
+    ]
+  },
 ];
 
 @NgModule({

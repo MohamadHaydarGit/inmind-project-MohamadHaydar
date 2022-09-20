@@ -58,8 +58,10 @@
   justify-content: center;
   grid-area: flag;
 }
-
-#details {
+.margin-20{
+  margin: 20px 0;
+}
+.details{
   grid-area: details;
   display: flex;
   flex-direction: column;

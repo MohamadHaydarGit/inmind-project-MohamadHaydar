@@ -6,6 +6,7 @@ import {Login, Tokens} from "../../../models/token";
 import {SignUp} from "../../../models/signup";
 import jwt_decode from 'jwt-decode';
 import {User} from "../../../models/user";
+import {NgxPermissionsService} from "ngx-permissions";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthService {
   private loggedUser: User | undefined;
   private readonly ROOT_URL = 'http://localhost:5005/api/User';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private ngxPermissionsService: NgxPermissionsService) {}
 
   signup(user: SignUp): Observable<boolean> {
     return this.http.post<any>(this.ROOT_URL+"/SignUp()",{
@@ -26,6 +27,29 @@ export class AuthService {
       "Email": user.Email,
       "Password": user.Password,
       "RoleName": user.RoleName
+    })
+      .pipe(
+        tap(response=> {
+          if(response.enabled){
+            return of(true);
+          }else {
+            alert("Account creation failed")
+            return of(false);
+          }
+        }),
+        catchError((error:HttpErrorResponse) => {
+          alert(error.message);
+          return of(false);
+        }));
+  }
+
+  createAdmin(admin: SignUp): Observable<boolean> {
+    return this.http.post<any>(this.ROOT_URL+"/CreateAdminUser()",{
+      "Firstname": admin.Firstname,
+      "Lastname": admin.Lastname,
+      "Email": admin.Email,
+      "Password": admin.Password,
+      "RoleName": admin.RoleName
     })
       .pipe(
         tap(response=> {
@@ -100,11 +124,30 @@ export class AuthService {
 
   private doLoginUser(username: string, tokens: Tokens) {
     this.storeTokens(tokens);
+    this.setProfile();
   }
 
-  private getProfile(){
-    return this.http.get<any>(this.ROOT_URL+'/GetProfile()').pipe(
-      catchError(this.handleError));
+
+   private setProfile(): void{
+       // @ts-ignore
+     const tokenInfo = this.getDecodedAccessToken(this.getJwtToken());
+     console.log( tokenInfo.realm_access.roles);
+       if(tokenInfo.realm_access.roles.includes("Admin")){
+         this.ngxPermissionsService.addPermission('ADMIN');
+         localStorage.setItem("permissions",JSON.stringify(['ADMIN']));
+       }
+       else{
+         this.ngxPermissionsService.addPermission('USER');
+         localStorage.setItem("permissions",JSON.stringify(['USER']));
+       }
+
+
+
+
+  }
+
+  getProfile(){
+   return this.loggedUser;
   }
 
   private handleError<T>(error: HttpErrorResponse) {
@@ -114,6 +157,8 @@ export class AuthService {
   public doLogoutUser() {
     // @ts-ignore
     this.loggedUser = null;
+    this.ngxPermissionsService.flushPermissions();
+
     this.removeTokens();
   }
 
@@ -136,6 +181,7 @@ export class AuthService {
   private removeTokens() {
     localStorage.removeItem(this.JWT_TOKEN);
     localStorage.removeItem(this.REFRESH_TOKEN);
+    localStorage.removeItem('permissions');
   }
 
 }

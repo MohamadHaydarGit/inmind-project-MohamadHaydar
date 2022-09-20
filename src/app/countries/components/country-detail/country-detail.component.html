@@ -1,31 +1,156 @@
 <app-navigation></app-navigation>
 <main *ngIf="country" id="content">
-    <div id="title">
-      <h2>{{country!.name.common}}</h2>
-    </div>
+  <div id="title">
+    <h2>{{country!.name.common}}</h2>
+  </div>
   <div id="flag">
     <span *ngIf="country!.tld" class="flag-icon flag-icon-{{country!.tld[0].slice(1)}}"></span>
   </div>
-  <div id="details">
+  <div id="details-user" class="details" *ngxPermissionsOnly="'USER'">
     <p>Capital City : {{country!.capital}}</p>
-    <p>Currency : <span *ngFor="let curr of country!.currencies! | keys">{{curr.name+' '}}</span></p>
-    <p>Language :<span *ngFor="let lang of country!.languages | keyvalue">{{lang.value+' '}}</span></p>
+    <p>Currency : <span
+      *ngFor="let curr of country!.currencies! | keys; let i = index">{{curr.name}}{{i === getCurrenciesLength() - 1 ? '' : ',&nbsp;' }}</span>
+    </p>
+    <p>Language :<span
+      *ngFor="let lang of country!.languages | keyvalue; let i = index">{{lang.value}}{{i === getLangLength() - 1 ? '' : ',&nbsp;' }}</span>
+    </p>
     <p>Continent :{{country!.continents}}</p>
-<!--    <p>Regional Bloc :{{country!.regionalBloc}}</p>-->
+    <!--    <p>Regional Bloc :{{country!.regionalBloc}}</p>-->
+
+  </div>
+  <div id="details-admin" class="details" *ngxPermissionsOnly="'ADMIN'">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="margin-20">
+            <h4>Edit Details</h4>
+          </div>
+          <form [formGroup]="formGroup" novalidate (ngSubmit)="save(formGroup)">
+            <div class="form-group">
+              <label>Capital</label>
+              <input type="text" class="form-control" formControlName="capital">
+              <small *ngIf="!formGroup.controls.capital.valid" class="text-danger">
+                Name is required (minimum 5 characters).
+              </small>
+            </div>
+            <!--currencies-->
+            <div formArrayName="currency">
+              <div *ngFor="let currency of formGroup.controls.currency.controls; let i=index"
+                   class="panel panel-default">
+                <div class="panel-heading margin-20">
+                  <span>Currency {{i + 1}}</span>
+                  <a *ngIf="formGroup.controls.currency.controls.length > 1" (click)="removeCurrency(i)"
+                     style="cursor: default; float: right">
+                    X
+                  </a>
+                </div>
+                <div class="panel-body" [formGroupName]="i" class="col-md-12 border">
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label>Code</label>
+                      <input type="text" class="form-control" formControlName="code">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label>Name</label>
+                      <input type="text" class="form-control" formControlName="name">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--languagues-->
+            <div formArrayName="language" class="margin-20">
+              <div *ngFor="let lang of formGroup.controls.language.controls; let i=index" class="panel panel-default">
+                <div class="panel-heading margin-20">
+                  <span>Language {{i + 1}}</span>
+                  <a *ngIf="formGroup.controls.language.controls.length > 1" (click)="removeLanguage(i)"
+                     style="cursor: default; float: right">
+                    X
+                  </a>
+                </div>
+                <div class="panel-body" [formGroupName]="i" class="col-md-12 border">
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label>Code</label>
+                      <input type="text" class="form-control" formControlName="code">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label>language</label>
+                      <input type="text" class="form-control" formControlName="lang">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="margin-20">
+              <a (click)="addLanguage()" style="cursor: default; float: right">
+                New Language +
+              </a>
+            </div>
+
+            <div class="margin-20">
+              <a (click)="addCurrency()" style="cursor: default; float: right">
+                New Currency +
+              </a>
+            </div>
+
+            <div class="margin-20">
+              <button type="submit" class="btn btn-primary pull-right">Submit</button>
+            </div>
+            <div class="clearfix"></div>
+
+            <!--            <div class="margin-20">-->
+            <!--              <pre>form value: <br>{{formGroup!.value | json}}</pre>-->
+            <!--            </div>-->
+          </form>
+        </div>
+      </div>
+    </div>
 
   </div>
   <div id="bordering">
-  <h2>Bordering Countries :</h2>
+    <h2>Bordering Countries :</h2>
     <div *ngIf="country.borders; else Noborders " id="bordering-countries">
-      <div *ngFor="let border of borders" class="couple" (click)="onSelect(border)"><span *ngIf="border.tld" class="flag-icon flag-icon-{{border.tld[0].slice(1)}}"></span>
-        <div class="border-name">{{border.name.common}}</div></div>
+      <div *ngFor="let border of borders" class="couple" (click)="onSelect(border)"><span *ngIf="border.tld"
+                                                                                          class="flag-icon flag-icon-{{border.tld[0].slice(1)}}"></span>
+        <div class="border-name">{{border.name.common}}</div>
+      </div>
     </div>
-    <ng-template #Noborders><p>{{country.name.common+' does not border any country'}}</p></ng-template>
+    <ng-template #Noborders><p>{{country.name.common + ' does not border any country'}}</p></ng-template>
 
   </div>
   <div id="gallery">
     <h2>Gallery :</h2>
+    <!--    <a (click)="uploadPage()">upload</a>-->
+    <!--    <a (click)="ImageListPage()">   List</a>-->
+    <div *ngxPermissionsOnly="'ADMIN'">
+      <select [(ngModel)]="userType">
+        <option value="list">Images List</option>
+        <option value="upload">Upload Image</option>
+      </select>
+
+      <div [ngSwitch]="userType">
+        <app-image-list *ngSwitchCase="'list'" [countryName]="country.name.common"></app-image-list>
+        <app-image *ngSwitchCase="'upload'" [countryName]="country.name.common"></app-image>
+      </div>
+    </div>
+
+    <div *ngxPermissionsOnly="'USER'">
+
+        <app-image-list [countryName]="country.name.common"></app-image-list>
+
+    </div>
+
 
   </div>
 </main>
 
+<router-outlet></router-outlet>
