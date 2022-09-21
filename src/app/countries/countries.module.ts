@@ -15,6 +15,10 @@ import {NgxPermissionsModule} from "ngx-permissions";
 import { ImageComponent } from './components/country-detail/image/image.component';
 import { ImageListComponent } from './components/country-detail/image-list/image-list.component';
 import {ImageService} from "./services/gallery-service/image.service";
+import {StoreModule} from "@ngrx/store";
+import {countryReducer} from "./state/countries.reducer";
+import {EffectsModule} from "@ngrx/effects";
+import {CountriesEffects} from "./state/countries.effects";
 
 
 @NgModule({
@@ -33,6 +37,8 @@ import {ImageService} from "./services/gallery-service/image.service";
     FormsModule,
     ReactiveFormsModule,
     NgxPermissionsModule.forChild(),
+    // StoreModule.forFeature({name: "countries", reducer: countryReducer},),
+    // EffectsModule.forFeature([CountriesEffects]),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFireDatabaseModule,

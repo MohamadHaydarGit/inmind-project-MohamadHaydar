@@ -4,7 +4,7 @@
 
 <h2>{{errorMsg}}</h2>
 
-<div class="container"  *ngFor="let country of countries">
+<div class="container"  *ngFor="let country of countries$ | async">
   <div class="card" *ngIf="(searchText === '' || country.name.common.toLowerCase().includes(searchText.toLowerCase()))&& (country.name.common.toLowerCase()!='israel') && (country.region.toLowerCase()===selectedRegion.toLowerCase() || selectedRegion==='')">
     <div class="flex-container">
     <div class="">

@@ -7,6 +7,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {TokenInterceptor} from "./authentication/token.interceptor";
 import {NgxPermissionsModule} from "ngx-permissions";
+import { StoreModule } from '@ngrx/store';
+import {countryReducer} from "./countries/state/countries.reducer";
+import {EffectsModule} from "@ngrx/effects";
+import {CountriesEffects} from "./countries/state/countries.effects";
 
 
 @NgModule({
@@ -20,6 +24,8 @@ import {NgxPermissionsModule} from "ngx-permissions";
     AppRoutingModule,
     HttpClientModule,
     NgxPermissionsModule.forRoot(),
+    StoreModule.forRoot({countries:countryReducer}),
+    EffectsModule.forRoot([CountriesEffects]),
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},{
     provide: HTTP_INTERCEPTORS,

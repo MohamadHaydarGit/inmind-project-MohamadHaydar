@@ -136,6 +136,8 @@
         <option value="list">Images List</option>
         <option value="upload">Upload Image</option>
       </select>
+      <br>
+      <br>  
 
       <div [ngSwitch]="userType">
         <app-image-list *ngSwitchCase="'list'" [countryName]="country.name.common"></app-image-list>

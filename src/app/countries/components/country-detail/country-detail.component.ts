@@ -5,6 +5,9 @@ import {CountryService} from "../../services/coutry-service/country.service";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {delay} from "rxjs/operators";
 import {ImageService} from "../../services/gallery-service/image.service";
+import {Observable} from "rxjs";
+import {loadCountries, loadFromStore} from "../../state/countries.actions";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-country-detail',
@@ -21,12 +24,15 @@ export class CountryDetailComponent implements OnInit {
   formGroup: any;
   userType: string = "upload";
 
+  // @ts-ignore
+  public countries$: Observable<Country[]> = this.store.select('countries');
 
   constructor(
     private route: ActivatedRoute, private router: Router,
     private countryService: CountryService,
     private formBuilder: FormBuilder,
-    private service : ImageService,
+    private service: ImageService,
+    private store: Store,
   ) {
   }
 
@@ -34,63 +40,64 @@ export class CountryDetailComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       let code = params.get('code');
       this.countryId = code;
-      this.route.data.subscribe(response => {
 
-       // console.log(response['country'][0]);
-        this.countries = response['country'][0];
-      //  console.log(this.countries);
-        this.country = this.countries.find(c => c.cca3 === this.countryId);
-        this.borders = response['country'][1];
-        this.formGroup = this.formBuilder.group({
-          capital: [this.country?.capital, [Validators.required]],
-          currency: this.formBuilder.array([
-            this.initCurrency(),
-          ]),
-          language:this.formBuilder.array([
-            this.initLanguage(),
-          ]),
-          continent:[this.country?.continents,[Validators.required]],
-          terms: false
-        });
-        this.fillCurrency();
-        this.fillLanguage();
-        this.service.getimageDetailList();
+      this.store.dispatch(loadFromStore());
 
+      this.countries$.subscribe(data => this.countries = data);
+      this.country = this.countries.find(c => c.cca3 === this.countryId);
+      this.borders = this.countries.filter(c => this.country?.borders?.includes(c.cca3));
+      this.formGroup = this.formBuilder.group({
+        capital: [this.country?.capital, [Validators.required]],
+        currency: this.formBuilder.array([
+          this.initCurrency(),
+        ]),
+        language: this.formBuilder.array([
+          this.initLanguage(),
+        ]),
+        continent: [this.country?.continents, [Validators.required]],
+        terms: false
       });
+      this.fillCurrency();
+      this.fillLanguage();
+      this.service.getimageDetailList();
+
+
       //  this.countryService.getBoundaries(this.country!.borders).subscribe(data => this.borders=data);
     });
 
   }
 
-  uploadPage(){
-    this.router.navigate(['upload'],{relativeTo: this.route});
+  uploadPage() {
+    this.router.navigate(['upload'], {relativeTo: this.route});
   }
-  ImageListPage(){
-    this.router.navigate(['list'],{relativeTo:this.route});
+
+  ImageListPage() {
+    this.router.navigate(['list'], {relativeTo: this.route});
   }
-  initLanguage(){
+
+  initLanguage() {
     // @ts-ignore
     let keyArr: any[] = Object.keys(this.country?.languages),
-      dataArr:string[] = [];
+      dataArr: string[] = [];
     keyArr.forEach((key: any) => {
       // @ts-ignore
       dataArr.push(this.country?.languages[key]);
     });
-      return this.formBuilder.group({
+    return this.formBuilder.group({
       code: [keyArr[0], Validators.required],
       lang: [dataArr[0], Validators.required],
 
-  });
+    });
 
   }
 
-  fillLanguage(){
+  fillLanguage() {
     // @ts-ignore
     const control = <FormArray>this.formGroup.controls['language'];
     // @ts-ignore
     let keyArr: any[] = Object.keys(this.country?.languages),
-      dataArr:string[] = [];
-    keyArr.slice(1).forEach((key: any,index) => {
+      dataArr: string[] = [];
+    keyArr.slice(1).forEach((key: any, index) => {
       // @ts-ignore
       dataArr.push(this.country?.languages[key]);
 
@@ -104,12 +111,12 @@ export class CountryDetailComponent implements OnInit {
   }
 
 
-  initCurrency(){
+  initCurrency() {
     // @ts-ignore
-  //  const control = <FormArray>this.formGroup.controls['currency'];
+    //  const control = <FormArray>this.formGroup.controls['currency'];
     // @ts-ignore
     let keyArr: any[] = Object.keys(this.country?.currencies),
-    dataArr:Aed[] = [];
+      dataArr: Aed[] = [];
     keyArr.forEach((key: any) => {
       // @ts-ignore
       dataArr.push(this.country!.currencies[key]);
@@ -127,13 +134,13 @@ export class CountryDetailComponent implements OnInit {
 
   }
 
-  fillCurrency(){
+  fillCurrency() {
     // @ts-ignore
-     const control = <FormArray>this.formGroup.controls['currency'];
+    const control = <FormArray>this.formGroup.controls['currency'];
     // @ts-ignore
     let keyArr: any[] = Object.keys(this.country?.currencies),
-      dataArr:Aed[] = [];
-    keyArr.slice(1).forEach((key: any,index) => {
+      dataArr: Aed[] = [];
+    keyArr.slice(1).forEach((key: any, index) => {
       // @ts-ignore
       dataArr.push(this.country?.currencies[key]);
 
@@ -146,7 +153,7 @@ export class CountryDetailComponent implements OnInit {
 
   }
 
-  addCurrency(){
+  addCurrency() {
     // @ts-ignore
     const control = <FormArray>this.formGroup.controls['currency'];
     control.push(this.formBuilder.group({
@@ -161,7 +168,7 @@ export class CountryDetailComponent implements OnInit {
     control.removeAt(i);
   }
 
-  addLanguage(){
+  addLanguage() {
     // @ts-ignore
     const control = <FormArray>this.formGroup.controls['language'];
     control.push(this.formBuilder.group({
@@ -176,20 +183,21 @@ export class CountryDetailComponent implements OnInit {
     control.removeAt(i);
   }
 
-  save(formData:any) {
+  save(formData: any) {
     console.log(formData.value)
   }
 
-  getLangLength(){
+  getLangLength() {
     // @ts-ignore
     return Object.keys(this.country!.languages).length
   }
-  getCurrenciesLength(){
+
+  getCurrenciesLength() {
     // @ts-ignore
     return Object.keys(this.country!.currencies).length
   }
 
-  onSelect(border:Country) {
+  onSelect(border: Country) {
     this.router.navigate(['/countries/details', border.cca3], {queryParams: {borders: border.borders},});
   }
 

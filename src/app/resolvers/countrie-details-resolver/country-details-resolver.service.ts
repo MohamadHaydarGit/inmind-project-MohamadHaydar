@@ -13,9 +13,10 @@ export class CountryDetailsResolverService implements Resolve<any>{
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
-    return forkJoin([
-       this.countryService.getCountry(<string>route.paramMap.get('code')),
-       this.countryService.getBoundaries(route.queryParams.borders),
-    ]);
+    // return forkJoin([
+    //    this.countryService.getCountry(<string>route.paramMap.get('code')),
+    //    this.countryService.getBoundaries(route.queryParams.borders),
+    // ]);
+    return 'd';
   }
 }
