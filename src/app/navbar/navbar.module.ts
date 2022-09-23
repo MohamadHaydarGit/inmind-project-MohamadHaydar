@@ -6,6 +6,7 @@ import { NavbarComponent } from './navbar.component';
 import {NavigationComponent} from "./components/navigation/navigation.component";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {TokenInterceptor} from "../authentication/token.interceptor";
+import {TranslocoRootModule} from "../transloco-root.module";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {TokenInterceptor} from "../authentication/token.interceptor";
   ],
   imports: [
     CommonModule,
-    NavbarRoutingModule
+    NavbarRoutingModule,
+    TranslocoRootModule
   ],
   exports: [
     NavigationComponent

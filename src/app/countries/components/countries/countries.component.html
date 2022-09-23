@@ -1,33 +1,36 @@
-<app-navigation></app-navigation>
+<ng-container *transloco="let t">
+  <app-navigation></app-navigation>
 
-<app-search (searchTextChanged)="onSearchTextEntered($event)" (selectRegionChange)="onSelectedRegion($event)" ></app-search>
+  <app-search (searchTextChanged)="onSearchTextEntered($event)"
+              (selectRegionChange)="onSelectedRegion($event)"></app-search>
 
-<h2>{{errorMsg}}</h2>
+  <h2>{{errorMsg}}</h2>
 
-<div class="container"  *ngFor="let country of countries$ | async">
-  <div class="card" *ngIf="(searchText === '' || country.name.common.toLowerCase().includes(searchText.toLowerCase()))&& (country.name.common.toLowerCase()!='israel') && (country.region.toLowerCase()===selectedRegion.toLowerCase() || selectedRegion==='')">
-    <div class="flex-container">
-    <div class="">
-<!--      <span *ngIf="country.tld" class="flag-icon flag-icon-{{country.tld[0].slice(1)}}"></span>-->
-      <div *ngIf="country.tld && country.tld[0]=='.uk'; then thenBlock; else elseBlock "></div>
+  <div class="container" *ngFor="let country of countries$ | async">
+    <div class="card"
+         *ngIf="(searchText === '' || country.name.common.toLowerCase().includes(searchText.toLowerCase()))&& (country.name.common.toLowerCase()!='israel') && (country.region.toLowerCase()===selectedRegion.toLowerCase() || selectedRegion==='')">
+      <div class="flex-container">
+        <div class="">
+          <!--      <span *ngIf="country.tld" class="flag-icon flag-icon-{{country.tld[0].slice(1)}}"></span>-->
+          <div *ngIf="country.tld && country.tld[0]=='.uk'; then thenBlock; else elseBlock "></div>
 
-      <ng-template #thenBlock>
-        <span class="flag-icon flag-icon-gb"></span>
-      </ng-template>
+          <ng-template #thenBlock>
+            <span class="flag-icon flag-icon-gb"></span>
+          </ng-template>
 
-      <ng-template #elseBlock>
-        <span *ngIf="country.tld" class="flag-icon flag-icon-{{country.tld[0].slice(1)}}"></span>
-      </ng-template>
+          <ng-template #elseBlock>
+            <span *ngIf="country.tld" class="flag-icon flag-icon-{{country.tld[0].slice(1)}}"></span>
+          </ng-template>
 
-    </div>
-    <div class="country-name">
-      {{country.name.common}}
-    </div>
-    <div class="">
-      <button class="btn btn-secondary" (click)="onSelect(country)">View Details</button>
-    </div>
+        </div>
+        <div class="country-name">
+          {{country.name.common}}
+        </div>
+        <div class="">
+          <button class="btn btn-secondary" (click)="onSelect(country)">{{t('countries.view_details')}}</button>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-
+</ng-container>
 

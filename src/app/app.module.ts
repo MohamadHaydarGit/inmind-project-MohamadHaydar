@@ -11,6 +11,9 @@ import { StoreModule } from '@ngrx/store';
 import {countryReducer} from "./countries/state/countries.reducer";
 import {EffectsModule} from "@ngrx/effects";
 import {CountriesEffects} from "./countries/state/countries.effects";
+import {Translation, translocoConfig, TranslocoLoader, TRANSLOCO_CONFIG, TRANSLOCO_LOADER} from "@ngneat/transloco";
+import {environment} from "../environments/environment";
+import {TranslocoRootModule} from "./transloco-root.module";
 
 
 @NgModule({
@@ -26,12 +29,15 @@ import {CountriesEffects} from "./countries/state/countries.effects";
     NgxPermissionsModule.forRoot(),
     StoreModule.forRoot({countries:countryReducer}),
     EffectsModule.forRoot([CountriesEffects]),
+    TranslocoRootModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
-  },],
+  },
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

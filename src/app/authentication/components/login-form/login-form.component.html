@@ -1,84 +1,91 @@
-<div class="flex-container">
-  <img src="../../../../assets/images/worldmap.jpg" class="img-fluid" alt="Responsive image">
+<app-navigation></app-navigation>
+  <div class="flex-container">
+    <img src="../../../../assets/images/worldmap.jpg" class="img-fluid" alt="Responsive image">
 
-  <div class="container">
-    <h1 class="title">
-      {{title}}
-    </h1>
-    <h5 class="title">{{subTitle}}</h5>
+    <div class="container">
+      <ng-container *transloco="let t">
+      <h1 class="title">
+          {{t('login.Login_to_your_Account')}}
+      </h1>
+      <h5 class="title">{{t('login.Welcome_back_please_enter_your_details')}}</h5>
 
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+      <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
 
 
-      <div class="form-group">
-        <label for="email">Email address
-          <span class="text-danger" *ngIf="checkIfEmpty('email')">*</span>
-        </label>
-        <input type="email" class="form-control" id="email"
-               placeholder="Enter email" formControlName="email"
-               [class.valid]="checkIfValid('email')"
-               [class.invalid]="checkIfInvalid('email')"
-        />
-        <div *ngIf="email.invalid &&
+        <div class="form-group">
+          <label for="email">{{t('login.Email_Address')}}
+            <span class="text-danger" *ngIf="checkIfEmpty('email')">*</span>
+          </label>
+          <input type="email" class="form-control" id="email"
+                 placeholder="{{t('login.enter_email')}}" formControlName="email"
+                 [class.valid]="checkIfValid('email')"
+                 [class.invalid]="checkIfInvalid('email')"
+          />
+          <div *ngIf="email.invalid &&
         email.errors &&
         (email.touched || email.dirty)">
-          <small *ngIf="email.hasError('required')"
-                 class="text-danger">
-            This field is required.
-          </small>
-          <small class="text-danger"
-                 *ngIf="email.hasError('pattern')">
-            Invalid email format! should include <@> and a domain.
-          </small>
+            <small *ngIf="email.hasError('required')"
+                   class="text-danger">
+              {{t('register.field_required')}}
+            </small>
+            <small class="text-danger"
+                   *ngIf="email.hasError('pattern')">
+              {{t('register.email_error')}}
+            </small>
+          </div>
         </div>
-      </div>
 
-      <label for="password">Password
-        <span class="text-danger" *ngIf="checkIfEmpty('password')">*</span>
-      </label>
+        <label for="password">{{t('login.Password')}}
+          <span class="text-danger" *ngIf="checkIfEmpty('password')">*</span>
+        </label>
 
-      <div class="form-group">
-        <div class="input-group">
+        <div class="form-group">
+          <div class="input-group">
 
-          <input #passwordInput type="password" class="form-control" id="password"
-                 placeholder="Enter password" formControlName="password"
-                 [class.valid]="checkIfValid('password')"
-                 [class.invalid]="checkIfInvalid('password')"
-          />
+            <input #passwordInput type="password" class="form-control" id="password"
+                   placeholder="{{t('login.enter_password')}}" formControlName="password"
+                   [class.valid]="checkIfValid('password')"
+                   [class.invalid]="checkIfInvalid('password')"
+            />
 
-          <div class="input-group-append">
+            <div class="input-group-append">
             <span class="input-group-text border-left-0 "><i
               [ngClass]="passwordInput.type=='password'?'bi bi-eye':'bi bi-eye-slash'" id="togglePassword"
               (click)="toggleVisibility(passwordInput)"></i></span>
-          </div>
+            </div>
 
-        </div>
-        <div *ngIf="password.invalid &&
+          </div>
+          <div *ngIf="password.invalid &&
         password.errors &&
         (password.touched || password.dirty)">
-          <small *ngIf="password.hasError('required')"
-                 class="text-danger">
-            This field is required.
-          </small>
-          <small class="text-danger"
-                 *ngIf="password.hasError('minlength')">
-            The minimum length for this field is {{password.errors!.minlength.requiredLength}} characters.
-          </small>
+            <small *ngIf="password.hasError('required')"
+                   class="text-danger">
+              {{t('register.field_required')}}
+            </small>
+            <small class="text-danger"
+                   *ngIf="password.hasError('minlength')">
+              {{t('register.min_length')}} {{password.errors!.minlength.requiredLength}} {{t('register.characters')}}.
+            </small>
+          </div>
         </div>
-      </div>
 
-      <div class="form-check form-check-inline" style="margin-bottom: 10px;">
-        <input type="checkbox" class="form-check-input" id="remember-me" value="remember-me" formControlName="check">
-        <label class="form-check-label" for="remember-me">Remember me</label>
-      </div>
+        <br>
+
+        <div class="form-check form-check-inline" style="margin-bottom: 10px;">
+          <input type="checkbox" class="form-check-input" id="remember-me" value="remember-me" formControlName="check">
+          <label class="form-check-label" for="remember-me">{{t('login.Remember_me')}}</label>
+        </div>
 
 
-      <div class="text-center">
-        <button class="btn btn-secondary" type="submit" [disabled]="formGroup.invalid">Log In</button>
-        <h5>Don't have an account? <a routerLink="/authentication/registration">Sign Up</a></h5>
-      </div>
+        <div class="text-center">
+          <button class="btn btn-secondary" type="submit" [disabled]="formGroup.invalid">{{t('login.Log_In')}}</button>
+          <h5>{{t('login.Don\'t_have_an_account?')}}<a routerLink="/authentication/registration">{{t('login.Sign_Up')}}</a></h5>
+        </div>
 
-    </form>
+      </form>
+
+      </ng-container>
+    </div>
+
   </div>
 
-</div>

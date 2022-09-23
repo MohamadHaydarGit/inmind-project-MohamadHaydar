@@ -12,12 +12,15 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   @Output()
   searchTextChanged: EventEmitter<string> = new EventEmitter<string>();
 
   @Output()
   selectRegionChange: EventEmitter<string> = new EventEmitter<string>();
 
+  //each time the text in the input box is changed the searchTextEvent emitter is triggired and emits the current values
+  //the trigger of the event will be caught in the parent component
   onSearchTextChanged(){
     this.searchTextChanged.emit(this.enteredSearchValue);
   }

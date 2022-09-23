@@ -19,6 +19,7 @@ import {StoreModule} from "@ngrx/store";
 import {countryReducer} from "./state/countries.reducer";
 import {EffectsModule} from "@ngrx/effects";
 import {CountriesEffects} from "./state/countries.effects";
+import {TranslocoRootModule} from "../transloco-root.module";
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import {CountriesEffects} from "./state/countries.effects";
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    TranslocoRootModule
   ],
   providers:[ImageService],
 })

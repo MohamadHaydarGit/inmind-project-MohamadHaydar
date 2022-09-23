@@ -25,12 +25,18 @@ export class CountriesEffects {
       ofType(loadCountries),
       // @ts-ignore
       switchMap(()=> {
-          // @ts-ignore
 
-          var storedCountries = JSON.parse(localStorage.getItem("countries"));
-          if(storedCountries.length>0){
-            return loadFromStore();
+          if(localStorage.getItem("countries")) {
+
+            // @ts-ignore
+            var storedCountries = JSON.parse(localStorage.getItem("countries"));
+
+            if (storedCountries.length > 0) {
+              return loadFromStore();
+            }
           }
+
+
 
         // Call the getTodos method, convert it to an observable
         return this.countryService.getCountries().pipe(

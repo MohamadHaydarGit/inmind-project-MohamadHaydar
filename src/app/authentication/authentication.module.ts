@@ -8,6 +8,8 @@ import { AuthenticationComponent } from './authentication.component';
 import {LoginFormComponent} from "./components/login-form/login-form.component";
 import {RegistrationFormComponent} from "./components/registration-form/registration-form.component";
 import {NgxPermissionsModule} from "ngx-permissions";
+import {TranslocoRootModule} from "../transloco-root.module";
+import {NavbarModule} from "../navbar/navbar.module";
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import {NgxPermissionsModule} from "ngx-permissions";
     ReactiveFormsModule,
     AuthenticationRoutingModule,
     NgxPermissionsModule.forChild(),
+    TranslocoRootModule,
+    NavbarModule,
   ],
   providers: [
   ]

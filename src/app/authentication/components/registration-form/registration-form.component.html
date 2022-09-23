@@ -1,142 +1,145 @@
-<div class="flex-container">
-<img src="../../../../assets/images/worldmap.jpg" class="img-fluid" alt="Responsive image">
+<ng-container *transloco="let t">
+  <app-navigation></app-navigation>
+  <div class="flex-container">
+    <img src="../../../../assets/images/worldmap.jpg" class="img-fluid" alt="Responsive image">
 
-<div class="container">
-  <h1 class="title">
-    {{title}}
-  </h1>
-  <h5 class="title">{{subTitle}}</h5>
+    <div class="container">
+      <h1 class="title">
+        {{t('register.create_account')}}
+      </h1>
+      <h5 class="title">{{t('register.sign_up_to_get_started')}}</h5>
 
-  <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
-    <div class="form-group">
-      <label for="f-name">First Name
-        <span class="text-danger" *ngIf="checkIfEmpty('firstName')">*</span>
-      </label>
-      <input type="text" class="form-control" id="f-name"
-             placeholder="Enter first name" formControlName="firstName"
-             [class.valid]="checkIfValid('firstName')"
-             [class.invalid]="checkIfInvalid('firstName')"
-      />
-      <div *ngIf="firstName.invalid &&
+      <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+        <div class="form-group">
+          <label for="f-name">{{t('register.firstname')}}
+            <span class="text-danger" *ngIf="checkIfEmpty('firstName')">*</span>
+          </label>
+          <input type="text" class="form-control" id="f-name"
+                 placeholder="{{t('register.enter_firstname')}}" formControlName="firstName"
+                 [class.valid]="checkIfValid('firstName')"
+                 [class.invalid]="checkIfInvalid('firstName')"
+          />
+          <div *ngIf="firstName.invalid &&
         firstName.errors &&
         (firstName.touched || firstName.dirty)">
-        <small *ngIf="firstName.hasError('required')"
-               class="text-danger">
-          This field is required.
-        </small>
-        <small class="text-danger"
-               *ngIf="firstName.hasError('minlength')">
-          The minimum length for this field is {{firstName.errors!.minlength.requiredLength}} characters.
-        </small>
-        <small class="text-danger"
-               *ngIf="firstName.hasError('maxlength')">
-          The maximum length for this field is {{firstName.errors!.maxlength.requiredLength}} characters.
-        </small>
-      </div>
-    </div>
+            <small *ngIf="firstName.hasError('required')"
+                   class="text-danger">
+              {{t('register.field_required')}}
+            </small>
+            <small class="text-danger"
+                   *ngIf="firstName.hasError('minlength')">
+              {{t('register.min_length')}} {{firstName.errors!.minlength.requiredLength}} {{t('register.characters')}}.
+            </small>
+            <small class="text-danger"
+                   *ngIf="firstName.hasError('maxlength')">
+              {{t('register.max_length')}} {{firstName.errors!.maxlength.requiredLength}} {{t('register.characters')}}.
+            </small>
+          </div>
+        </div>
 
-    <div class="form-group">
-      <label for="l-name">Last Name
-        <span class="text-danger" *ngIf="checkIfEmpty('lastName')">*</span>
-      </label>
-      <input type="text" class="form-control" id="l-name"
-             placeholder="Enter last name" formControlName="lastName"
-             [class.valid]="checkIfValid('lastName')"
-             [class.invalid]="checkIfInvalid('lastName')"
-      />
+        <div class="form-group">
+          <label for="l-name">{{t('register.lastname')}}
+            <span class="text-danger" *ngIf="checkIfEmpty('lastName')">*</span>
+          </label>
+          <input type="text" class="form-control" id="l-name"
+                 placeholder="{{t('register.enter_lastname')}}" formControlName="lastName"
+                 [class.valid]="checkIfValid('lastName')"
+                 [class.invalid]="checkIfInvalid('lastName')"
+          />
 
-      <div *ngIf="lastName.invalid &&
+          <div *ngIf="lastName.invalid &&
         lastName.errors &&
         (lastName.touched || lastName.dirty)">
-        <small *ngIf="lastName.hasError('required')"
-               class="text-danger">
-          This field is required.
-        </small>
-        <small class="text-danger"
-               *ngIf="lastName.hasError('minlength')">
-          The minimum length for this field is {{lastName.errors!.minlength.requiredLength}} characters.
-        </small>
-        <small class="text-danger"
-               *ngIf="lastName.hasError('maxlength')">
-          The maximum length for this field is {{lastName.errors!.maxlength.requiredLength}} characters.
-        </small>
-      </div>
+            <small *ngIf="lastName.hasError('required')"
+                   class="text-danger">
+              {{t('register.field_required')}}
+            </small>
+            <small class="text-danger"
+                   *ngIf="lastName.hasError('minlength')">
+              {{t('register.min_length')}} {{lastName.errors!.minlength.requiredLength}} {{t('register.characters')}}.
+            </small>
+            <small class="text-danger"
+                   *ngIf="lastName.hasError('maxlength')">
+              {{t('register.max_length')}} {{lastName.errors!.maxlength.requiredLength}} {{t('register.characters')}}.
+            </small>
+          </div>
 
-    </div>
+        </div>
 
-    <div class="form-group">
-      <label for="email">Email address
-          <span class="text-danger" *ngIf="checkIfEmpty('email')">*</span>
-      </label>
-      <input type="email" class="form-control" id="email"
-             placeholder="Enter email" formControlName="email"
-             [class.valid]="checkIfValid('email')"
-             [class.invalid]="checkIfInvalid('email')"
-      />
-      <div *ngIf="email.invalid &&
+        <div class="form-group">
+          <label for="email">{{t('register.email_address')}}
+            <span class="text-danger" *ngIf="checkIfEmpty('email')">*</span>
+          </label>
+          <input type="email" class="form-control" id="email"
+                 placeholder="{{t('register.enter_email_address')}}" formControlName="email"
+                 [class.valid]="checkIfValid('email')"
+                 [class.invalid]="checkIfInvalid('email')"
+          />
+          <div *ngIf="email.invalid &&
         email.errors &&
         (email.touched || email.dirty)">
-        <small *ngIf="email.hasError('required')"
-               class="text-danger">
-          This field is required.
-        </small>
-        <small class="text-danger"
-               *ngIf="email.hasError('pattern')">
-          Invalid email format! should include <@> and a domain.
-        </small>
-      </div>
-    </div>
+            <small *ngIf="email.hasError('required')"
+                   class="text-danger">
+              {{t('register.field_required')}}
+            </small>
+            <small class="text-danger"
+                   *ngIf="email.hasError('pattern')">
+              {{t('register.email_error')}}
+            </small>
+          </div>
+        </div>
 
-    <label for="password">Password
-      <span class="text-danger" *ngIf="checkIfEmpty('password')">*</span>
-    </label>
+        <label for="password">{{t('register.password')}}
+          <span class="text-danger" *ngIf="checkIfEmpty('password')">*</span>
+        </label>
 
-    <div class="form-group">
-    <div class="input-group">
+        <div class="form-group">
+          <div class="input-group">
 
-      <input #passwordInput type="password" class="form-control" id="password"
-             placeholder="Enter password" formControlName="password"
-             [class.valid]="checkIfValid('password')"
-             [class.invalid]="checkIfInvalid('password')"
-      />
+            <input #passwordInput type="password" class="form-control" id="password"
+                   placeholder="{{t('register.enter_password')}}" formControlName="password"
+                   [class.valid]="checkIfValid('password')"
+                   [class.invalid]="checkIfInvalid('password')"
+            />
 
-      <div class="input-group-append" >
-      <span class="input-group-text border-left-0 " ><i [ngClass]="passwordInput.type=='password'?'bi bi-eye':'bi bi-eye-slash'" id="togglePassword" (click)="toggleVisibility(passwordInput)"></i></span>
-      </div>
+            <div class="input-group-append">
+              <span class="input-group-text border-left-0 "><i
+                [ngClass]="passwordInput.type=='password'?'bi bi-eye':'bi bi-eye-slash'" id="togglePassword"
+                (click)="toggleVisibility(passwordInput)"></i></span>
+            </div>
 
-    </div>
-      <div  *ngIf="password.invalid &&
+          </div>
+          <div *ngIf="password.invalid &&
         password.errors &&
         (password.touched || password.dirty)">
-        <small *ngIf="password.hasError('required')"
-               class="text-danger">
-          This field is required.
-        </small>
-        <small class="text-danger"
-               *ngIf="password.hasError('minlength')">
-          The minimum length for this field is {{password.errors!.minlength.requiredLength}} characters.
-        </small>
-      </div>
+            <small *ngIf="password.hasError('required')"
+                   class="text-danger">
+              {{t('register.field_required')}}
+            </small>
+            <small class="text-danger"
+                   *ngIf="password.hasError('minlength')">
+              {{t('register.min_length')}}{{password.errors!.minlength.requiredLength}} {{t('register.characters')}}.
+            </small>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="role">{{t('register.role')}}</label>
+          <select class="form-control" id="role" formControlName="role" (change)="change()">
+            <option value="user">{{t('register.user')}}</option>
+            <option value="admin">{{t('register.admin')}}</option>
+          </select>
+        </div>
+
+
+        <div class="text-center">
+          <button class="btn btn-secondary" type="submit" [disabled]="formGroup.invalid">{{t('register.get_started')}}</button>
+          <h5>{{t('register.already_have_an_account?')}} <a routerLink="/authentication/login">{{t('register.login')}}</a></h5>
+        </div>
+
+      </form>
     </div>
 
-
-
-
-    <div class="form-group">
-      <label for="role">Role</label>
-      <select class="form-control" id="role" formControlName="role" (change)="change()">
-        <option value="user">User</option>
-        <option value="admin">Admin</option>
-      </select>
-    </div>
-
-
-<div class="text-center">
-  <button class="btn btn-secondary" type="submit" [disabled]="formGroup.invalid">Get Started</button>
-  <h5>already have an account? <a routerLink="/authentication/login">Log in</a></h5>
-</div>
-
-  </form>
-</div>
-
-</div>
+  </div>
+</ng-container>

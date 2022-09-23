@@ -4,6 +4,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth-service/auth.service";
 import {NgxPermissionsService} from "ngx-permissions";
+import {TranslocoService} from "@ngneat/transloco";
 
 
 @Component({
@@ -18,11 +19,13 @@ export class LoginFormComponent implements OnInit {
   formGroup : any;
   username : string= '';
 
+
   constructor(
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
     private router: Router,
-    private authService: AuthService,
+    private authService: AuthService
+
 
   ) { }
 
@@ -32,6 +35,7 @@ export class LoginFormComponent implements OnInit {
       this.username = localStorage.getItem("username");
     }
 
+
     this.formGroup = this.formBuilder.group({
       email: [this.username,[Validators.required,Validators.pattern(/^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i)]],
       password: ['',[Validators.required, Validators.minLength(8)]],
@@ -39,6 +43,8 @@ export class LoginFormComponent implements OnInit {
       terms: false
     });
   }
+
+
   checkIfEmpty (input : string) : boolean {
     // @ts-ignore
     return this.formGroup.get(input).errors && this.formGroup.get(input).hasError('required');

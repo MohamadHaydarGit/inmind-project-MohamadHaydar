@@ -1,0 +1,67 @@
+{
+  "login": {
+    "Login_to_your_Account": "Login to your Account",
+    "Welcome_back_please_enter_your_details":  "Welcome back please enter your details",
+    "Email_Address": "Email Address",
+    "Password": "Password",
+    "Remember_me": "Remember me",
+    "Log_In": "Log In",
+    "Don't_have_an_account?": "Don't have an account?",
+    "Sign_Up": "Sign Up",
+    "enter_email": "Enter Email",
+    "enter_password": "Enter Password",
+    "field_required": "This field is required",
+    "min_length": "The minimum length of this field is",
+    "max_length": "The maximum length of this field is",
+    "characters": "characters",
+    "email_error": "Invalid email format! should include <@> and a domain."
+  },
+
+  "register": {
+    "create_account": "Create an Account",
+    "sign_up_to_get_started": "Sign up now to get started with an account",
+    "firstname": "First Name",
+    "enter_firstname": "Enter first name",
+    "lastname": "Last name",
+    "enter_lastname": "Enter last name",
+    "email_address": "Email Address",
+    "enter_email_address": "Enter Email Address",
+    "password": "Password",
+    "enter_password": "Enter Password",
+    "role": "Role",
+    "user": "User",
+    "admin": "Admin",
+    "get_started": "Get Started",
+    "already_have_an_account": "already have an account?",
+    "login": "Log in",
+    "field_required": "This field is required",
+    "min_length": "The minimum length of this field is",
+    "max_length": "The maximum length of this field is",
+    "characters": "characters",
+    "email_error": "Invalid email format! should include <@> and a domain."
+  },
+
+  "navigation": {
+    "logout": "Logout"
+  },
+
+  "countries": {
+    "search": "Search",
+    "search_by_country_name": "Search by country name",
+    "regions": "Regions",
+    "all_regions": "All Regions",
+    "view_details": "View Details"
+
+  },
+
+  "details": {
+    "capital_city": "Capital City",
+    "currency": "Currency",
+    "language": "Language",
+    "continent": "Continent",
+    "bordering_countries": "Bordering Countries",
+    "gallery": "Gallery"
+  }
+
+
+}

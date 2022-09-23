@@ -24,6 +24,9 @@ export class CountryDetailComponent implements OnInit {
   formGroup: any;
   userType: string = "upload";
 
+  //We're accessing the store from ngrx , and then selecting countries which is defined as a  property from app.module.ts
+  // in StoreModule.forRoot({}). This calls the countries reducer and returns the countries state.
+
   // @ts-ignore
   public countries$: Observable<Country[]> = this.store.select('countries');
 
@@ -38,14 +41,24 @@ export class CountryDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
+      //get the cca3 code of the country that we want to show its details
       let code = params.get('code');
       this.countryId = code;
 
+      //trigger loadFromStore action
       this.store.dispatch(loadFromStore());
 
+      //$countries is an observable so we subscribe to it and it returns the current state
+      //which is countries array
       this.countries$.subscribe(data => this.countries = data);
+
+      //find the designated country based on the cca3 code
       this.country = this.countries.find(c => c.cca3 === this.countryId);
+
+      //find the border countries of the designated country  based on the cca3 code
       this.borders = this.countries.filter(c => this.country?.borders?.includes(c.cca3));
+
+      //creating reactive form for the admin to be able to edit country information
       this.formGroup = this.formBuilder.group({
         capital: [this.country?.capital, [Validators.required]],
         currency: this.formBuilder.array([
@@ -57,25 +70,19 @@ export class CountryDetailComponent implements OnInit {
         continent: [this.country?.continents, [Validators.required]],
         terms: false
       });
+      //fill the inputs related with the currencies and languages related to the country
       this.fillCurrency();
       this.fillLanguage();
       this.service.getimageDetailList();
 
 
-      //  this.countryService.getBoundaries(this.country!.borders).subscribe(data => this.borders=data);
     });
 
   }
 
-  uploadPage() {
-    this.router.navigate(['upload'], {relativeTo: this.route});
-  }
-
-  ImageListPage() {
-    this.router.navigate(['list'], {relativeTo: this.route});
-  }
 
   initLanguage() {
+    //initLanguage returns a group that contains the first language spoken in the country (assumin there is more)
     // @ts-ignore
     let keyArr: any[] = Object.keys(this.country?.languages),
       dataArr: string[] = [];
@@ -92,6 +99,8 @@ export class CountryDetailComponent implements OnInit {
   }
 
   fillLanguage() {
+    //fillLanguage pushes to the array the rest of the languages spoken in that country without
+    // the first one because it was added in initLanguage
     // @ts-ignore
     const control = <FormArray>this.formGroup.controls['language'];
     // @ts-ignore
@@ -112,8 +121,8 @@ export class CountryDetailComponent implements OnInit {
 
 
   initCurrency() {
-    // @ts-ignore
-    //  const control = <FormArray>this.formGroup.controls['currency'];
+  //initCurrency returns a group that contains the first language spoken in the country (assumin there is more)
+
     // @ts-ignore
     let keyArr: any[] = Object.keys(this.country?.currencies),
       dataArr: Aed[] = [];
@@ -121,11 +130,6 @@ export class CountryDetailComponent implements OnInit {
       // @ts-ignore
       dataArr.push(this.country!.currencies[key]);
 
-      // control.push(this.formBuilder.group({
-      //   code: [key.toString(), Validators.required],
-      //   // @ts-ignore
-      //   name: [this.country!.currencies[key], Validators.required],
-      // }));
     });
     return this.formBuilder.group({
       code: [keyArr[0], Validators.required],
@@ -135,6 +139,8 @@ export class CountryDetailComponent implements OnInit {
   }
 
   fillCurrency() {
+    //fillCurrency pushes to the array the rest of the languages spoken in that country without
+    // the first one because it was added in initLanguage
     // @ts-ignore
     const control = <FormArray>this.formGroup.controls['currency'];
     // @ts-ignore
@@ -198,7 +204,7 @@ export class CountryDetailComponent implements OnInit {
   }
 
   onSelect(border: Country) {
-    this.router.navigate(['/countries/details', border.cca3], {queryParams: {borders: border.borders},});
+    this.router.navigate(['/countries/details', border.cca3],);
   }
 
 

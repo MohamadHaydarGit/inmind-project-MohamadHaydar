@@ -1,6 +1,14 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" routerLink="/countries/list">WIKICOUNTRY</a>
+<ng-container *transloco="let t">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" routerLink="/countries/list">WIKICOUNTRY</a>
+    <ng-container *ngIf="isLoggedIn()">
     <span class="navbar-text">
-      <a (click)="logout()">Logout</a>
+      <a (click)="logout()">{{t('navigation.logout')}}</a>
     </span>
-</nav>
+    </ng-container>
+    <select #language (change)="updateLang(language.value)" class="form-control">
+      <option value="en" [selected]="lang=='en'">English</option>
+      <option value="es" [selected]="lang=='es'">Española</option>
+    </select>
+  </nav>
+</ng-container>

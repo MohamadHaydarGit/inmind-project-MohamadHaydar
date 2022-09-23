@@ -9,9 +9,11 @@ export class ImageService {
 
   constructor(private firebase:AngularFireDatabase) { }
   getimageDetailList(){
+    //get a reference to the imageDetails list of images in firebase realtime database
     this.imageDetailList = this.firebase.list('imageDetails');
   }
   insertImageDetails(imageDetails:any){
+    //add imageDetails to the list
     this.imageDetailList!.push(imageDetails);
 
   }

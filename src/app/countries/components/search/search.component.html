@@ -1,20 +1,21 @@
+<ng-container *transloco="let t">
 <div class="wrapper">
   <div class="card text-center">
     <div class="card-header">
-      Search
+      {{t('countries.search')}}
     </div>
     <div class="card-body">
-      <input id='country-search' type="text" placeholder="Search by country name" [(ngModel)]="enteredSearchValue" (input)="onSearchTextChanged()">
+      <input id='country-search' type="text" placeholder="{{t('countries.search_by_country_name')}}" [(ngModel)]="enteredSearchValue" (input)="onSearchTextChanged()">
       <div class="flex-container">
         <div class="form-group">
-            <label for="exampleFormControlSelect1">Regions</label>
+            <label for="exampleFormControlSelect1">{{t('countries.regions')}}</label>
           <select #Regions (change)="onSelectChange(Regions.value)" class="form-control" id="exampleFormControlSelect1">
-            <option value="">All Regions</option>
-            <option value="Africa">Africa</option>
-            <option value="Americas"> Americas</option>
-            <option value="Asia">Asia</option>
-            <option value="Europe">Europe</option>
-            <option value="Oceania">Oceania</option>
+            <option value="">{{t('countries.all_regions')}}</option>
+            <option value="Africa">{{t('countries.africa')}}</option>
+            <option value="Americas"> {{t('countries.americas')}}</option>
+            <option value="Asia">{{t('countries.asia')}}</option>
+            <option value="Europe">{{t('countries.europe')}}</option>
+            <option value="Oceania">{{t('countries.oceania')}}</option>
           </select>
         </div>
 

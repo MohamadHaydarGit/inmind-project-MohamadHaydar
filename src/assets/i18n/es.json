@@ -1,0 +1,73 @@
+{
+  "login": {
+    "Login_to_your_Account": "Ingrese a su cuenta",
+    "Welcome_back_please_enter_your_details":  "Bienvenido de nuevo por favor ingrese sus datos",
+    "Email_Address": "Dirección de correo electrónico",
+    "Password": "la contraseña",
+    "Remember_me": "Acuérdate de mí",
+    "Log_In": "Iniciar sesión",
+    "Don't_have_an_account?": "¿No tienes una cuenta?",
+    "Sign_Up": "Inscribirse",
+    "enter_email": "Ingrese correo electrónico",
+    "enter_password": "Introducir la contraseña",
+    "field_required": "Este campo es obligatorio",
+    "min_length": "La longitud mínima de este campo es",
+    "max_length": "La longitud máxima de este campo es",
+    "characters": "caracteres",
+    "email_error": "¡Formato de correo inválido! debe incluir <@> y un dominio."
+  },
+
+  "register": {
+    "create_account": "Crea una cuenta",
+    "sign_up_to_get_started": "Regístrese ahora para comenzar con una cuenta",
+    "firstname": "Primer nombre",
+    "enter_firstname": "Ingrese el nombre",
+    "lastname": "Apellido",
+    "enter_lastname": "Introduzca el apellido",
+    "email_address": "Dirección de correo electrónico",
+    "enter_email_address": "Introduzca la dirección de correo electrónico",
+    "password": "la contraseña",
+    "enter_password": "Introducir la contraseña",
+    "role": "Role",
+    "user": "Usuario/Usaria",
+    "admin": "Administrador/Administradora",
+    "get_started": "Empezar",
+    "already_have_an_account": "¿Ya tienes una cuenta?",
+    "login": "Iniciar sesión",
+    "field_required": "Este campo es obligatorio",
+    "min_length": "La longitud mínima de este campo es",
+    "max_length": "La longitud máxima de este campo es",
+    "characters": "caracteres",
+    "email_error": "¡Formato de correo inválido! debe incluir <@> y un dominio."
+  },
+
+
+  "navigation": {
+    "logout": "Cerrar Sesión"
+  },
+
+  "countries": {
+    "search": "Búsqueda",
+    "search_by_country_name": "Buscar por nombre de país",
+    "regions": "Regiones",
+    "all_regions": "Todas las regiones",
+    "africa": "África",
+    "americas": "americas",
+    "asia": "Asia",
+    "europe": "Europa",
+    "oceania": "Oceanía",
+    "view_details": "Ver detalles"
+
+  },
+
+  "details": {
+    "capital_city": "Ciudad capital",
+    "currency": "Divisa",
+    "language": "Idioma",
+    "continent": "Continente",
+    "bordering_countries": "Países fronterizos",
+    "gallery": "Galería"
+  }
+
+
+}

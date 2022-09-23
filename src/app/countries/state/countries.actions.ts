@@ -1,6 +1,7 @@
 import { createAction, props } from "@ngrx/store";
 import {Country} from '../../models/country';
 
+//creating actions and exporting them for use within the reducer
 export const loadCountries = createAction(
   '[Countries Page] Load Countries',
   );
