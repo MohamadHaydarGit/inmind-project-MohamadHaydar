@@ -66,7 +66,25 @@
     "language": "Idioma",
     "continent": "Continente",
     "bordering_countries": "Países fronterizos",
-    "gallery": "Galería"
+    "gallery": "Galería",
+    "edit_details": "Editar detalles",
+    "name_required": "El nombre es obligatorio (mínimo 5 caracteres)",
+    "code": "código",
+    "name": "nombre",
+    "new_language": "Nuevo idioma +",
+    "new_currency": "Nueva moneda +",
+    "submit": "Enviar",
+    "image_list": "Lista de imágenes",
+    "upload_image": "Cargar imagen"
+  },
+
+  "image_form": {
+    "select": "Seleccionar archivo para cargar",
+    "choose_file": "Elija el archivo",
+    "no_file_chosen": "Ningún archivo elegido",
+    "caption": "subtítulo",
+    "country_name": "Nombre del país",
+    "submit": "Enviar"
   },
 
   "not_found": {

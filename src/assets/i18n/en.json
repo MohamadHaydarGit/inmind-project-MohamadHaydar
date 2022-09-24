@@ -65,9 +65,26 @@
     "language": "Language",
     "continent": "Continent",
     "bordering_countries": "Bordering Countries",
-    "gallery": "Gallery"
+    "gallery": "Gallery",
+    "edit_details": "Edit Details",
+    "name_required": "Name is required (minimum 5 characters)",
+    "code": "code",
+    "name": "name",
+    "new_language": "New Language +",
+    "new_currency": "New Currency +",
+    "submit": "Submit",
+    "image_list": "Image List",
+    "upload_image": "Upload Image"
   },
 
+  "image_form": {
+    "select": "Select File to Upload",
+    "choose_file": "Choose File",
+    "no_file_chosen": "No File Chosen",
+    "caption": "caption",
+    "country_name": "Country Name",
+    "submit": "Submit"
+  },
   "not_found": {
     "page_not_found": "We are sorry, Page not found!",
     "description": "The page you are looking for might have been removed had its name changed or is temporarily unavailable.",

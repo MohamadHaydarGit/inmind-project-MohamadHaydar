@@ -25,14 +25,14 @@
         <div class="row">
           <div class="col-md-12">
             <div class="margin-20">
-              <h4>Edit Details</h4>
+              <h4>{{t("details.edit_details")}}</h4>
             </div>
             <form [formGroup]="formGroup" novalidate (ngSubmit)="save(formGroup.value)">
               <div class="form-group">
-                <label>Capital</label>
+                <label>{{t('details.capital_city')}}</label>
                 <input type="text" class="form-control" formControlName="capital">
                 <small *ngIf="!formGroup.controls.capital.valid" class="text-danger">
-                  Name is required (minimum 5 characters).
+                    {{t('details.name_required')}}
                 </small>
               </div>
               <!--currencies-->
@@ -40,7 +40,7 @@
                 <div *ngFor="let currency of formGroup.controls.currency.controls; let i=index"
                      class="panel panel-default">
                   <div class="panel-heading margin-20">
-                    <span>Currency {{i + 1}}</span>
+                    <span>{{t('details.currency')}} {{i + 1}}</span>
                     <a *ngIf="formGroup.controls.currency.controls.length > 1" (click)="removeCurrency(i)"
                        style="cursor: default; float: right">
                       X
@@ -49,13 +49,13 @@
                   <div class="panel-body" [formGroupName]="i" class="col-md-12 border">
                     <div class="row">
                       <div class="form-group col-md-6">
-                        <label>Code</label>
+                        <label>{{t("details.code")}}</label>
                         <input type="text" class="form-control" formControlName="code">
                       </div>
                     </div>
                     <div class="row">
                       <div class="form-group col-md-6">
-                        <label>Name</label>
+                        <label>{{t("details.name")}}</label>
                         <input type="text" class="form-control" formControlName="name">
                       </div>
                     </div>
@@ -67,7 +67,7 @@
               <div formArrayName="language" class="margin-20">
                 <div *ngFor="let lang of formGroup.controls.language.controls; let i=index" class="panel panel-default">
                   <div class="panel-heading margin-20">
-                    <span>Language {{i + 1}}</span>
+                    <span>{{t("details.language")}} {{i + 1}}</span>
                     <a *ngIf="formGroup.controls.language.controls.length > 1" (click)="removeLanguage(i)"
                        style="cursor: default; float: right">
                       X
@@ -76,13 +76,13 @@
                   <div class="panel-body" [formGroupName]="i" class="col-md-12 border">
                     <div class="row">
                       <div class="form-group col-md-6">
-                        <label>Code</label>
+                        <label>{{t("code")}}</label>
                         <input type="text" class="form-control" formControlName="code">
                       </div>
                     </div>
                     <div class="row">
                       <div class="form-group col-md-6">
-                        <label>language</label>
+                        <label>{{t("details.language")}}</label>
                         <input type="text" class="form-control" formControlName="lang">
                       </div>
                     </div>
@@ -93,18 +93,18 @@
 
               <div class="margin-20">
                 <a (click)="addLanguage()" style="cursor: default; float: right">
-                  New Language +
+                  {{t("details.new_language")}}
                 </a>
               </div>
 
               <div class="margin-20">
                 <a (click)="addCurrency()" style="cursor: default; float: right">
-                  New Currency +
+                  {{t("details.new_currency")}}
                 </a>
               </div>
 
               <div class="margin-20">
-                <button type="submit" class="btn btn-secondary pull-right">Submit</button>
+                <button type="submit" class="btn btn-secondary pull-right">{{t('details.submit')}}</button>
               </div>
               <div class="clearfix"></div>
 
@@ -134,8 +134,8 @@
       <!--    <a (click)="ImageListPage()">   List</a>-->
       <div *ngxPermissionsOnly="'ADMIN'">
         <select [(ngModel)]="userType">
-          <option value="list">Images List</option>
-          <option value="upload">Upload Image</option>
+          <option value="list">{{t('details.image_list')}}</option>
+          <option value="upload">{{t('details.upload_image')}}</option>
         </select>
         <br>
         <br>

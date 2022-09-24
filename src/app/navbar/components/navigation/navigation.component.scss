@@ -1,11 +1,24 @@
-.navbar{
+.navbar {
   display: flex;
   justify-content: space-between;
+  position: fixed;
+  min-width: 100%;
+  z-index: 2;
+  top: 0px;
 }
-a{
+
+a {
   cursor: pointer;
 }
-.form-control{
-  width: 10%;
+
+.form-control {
+  max-width: 150px;
   margin: 0 0 auto 0;
+}
+
+@media screen and (max-width: 600px) {
+  .navbar-brand {
+  font-size: small;
+  }
+
 }
