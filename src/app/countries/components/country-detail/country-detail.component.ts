@@ -6,7 +6,7 @@ import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {delay} from "rxjs/operators";
 import {ImageService} from "../../services/gallery-service/image.service";
 import {Observable} from "rxjs";
-import {loadCountries, loadFromStore} from "../../state/countries.actions";
+import {loadCountries, loadFromStore, updateCountries} from "../../state/countries.actions";
 import {Store} from "@ngrx/store";
 
 @Component({
@@ -20,6 +20,7 @@ export class CountryDetailComponent implements OnInit {
   public countries: Country[] = [];
   public errorMsg: string = '';
   country: Country | undefined;
+  countryCopy: Country | undefined;
   borders: Country[] = [];
   formGroup: any;
   userType: string = "upload";
@@ -190,7 +191,19 @@ export class CountryDetailComponent implements OnInit {
   }
 
   save(formData: any) {
-    console.log(formData.value)
+    console.log(formData);
+    console.log(this.country);
+    var object = formData['language'].reduce(
+      (obj: any, item: { code: string; lang: string; }) => Object.assign(obj, { [item.code]: item.lang }), {});
+
+    console.log(object);
+
+   // @ts-ignore
+   this.countryCopy = {...this.country};
+
+   // @ts-ignore
+   this.countryCopy?.languages=object;
+   this.store.dispatch(updateCountries({country: this.countryCopy}));
   }
 
   getLangLength() {

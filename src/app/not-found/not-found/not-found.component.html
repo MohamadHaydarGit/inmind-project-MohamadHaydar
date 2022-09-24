@@ -1,0 +1,13 @@
+<app-navigation></app-navigation>
+<ng-container *transloco="let t">
+  <div id="notfound">
+    <div class="notfound">
+      <div class="notfound-404">
+        <h1>404</h1>
+      </div>
+      <h2>{{t('not_found.page_not_found')}}</h2>
+      <p>{{t('not_found.description')}}</p>
+      <a href="#" class="btn-secondary" (click)="backToHomePage()">{{t('not_found.back_home_page')}}</a>
+    </div>
+  </div>
+</ng-container>

@@ -27,7 +27,7 @@
             <div class="margin-20">
               <h4>Edit Details</h4>
             </div>
-            <form [formGroup]="formGroup" novalidate (ngSubmit)="save(formGroup)">
+            <form [formGroup]="formGroup" novalidate (ngSubmit)="save(formGroup.value)">
               <div class="form-group">
                 <label>Capital</label>
                 <input type="text" class="form-control" formControlName="capital">
@@ -104,7 +104,7 @@
               </div>
 
               <div class="margin-20">
-                <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                <button type="submit" class="btn btn-secondary pull-right">Submit</button>
               </div>
               <div class="clearfix"></div>
 

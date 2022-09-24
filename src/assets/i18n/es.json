@@ -52,7 +52,7 @@
     "regions": "Regiones",
     "all_regions": "Todas las regiones",
     "africa": "África",
-    "americas": "americas",
+    "americas": "Americas",
     "asia": "Asia",
     "europe": "Europa",
     "oceania": "Oceanía",
@@ -67,6 +67,12 @@
     "continent": "Continente",
     "bordering_countries": "Países fronterizos",
     "gallery": "Galería"
+  },
+
+  "not_found": {
+    "page_not_found": "Lo sentimos, ¡Página no encontrada!",
+    "description": "La página que está buscando podría haber sido eliminada debido a que cambió su nombre o no está disponible temporalmente.",
+    "back_home_page": "Volver a la página de inicio"
   }
 
 

@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import {
-  loadCountries, loadCountriesSuccess, loadFromStore
+  loadCountries, loadCountriesSuccess, loadFromStore, updateCountries
 } from './countries.actions';
 import { Country } from '../../models/country';
 import {state} from "@angular/animations";
@@ -19,20 +19,24 @@ export const countryReducer = createReducer(
     return state
   }),
   on(loadFromStore, (state) => {
-
       return state;
-
-
   }),
   // Handle successfully loaded todos
   on(loadCountriesSuccess, (state, { countries }) => {
-
    return [...state,...countries]
-} )
+} ),
+  on(updateCountries,(state,{country})=>{
+    console.log('enter');
+      let index = state.findIndex(c => c.cca3==country.cca3);
+      state[index]=country;
+      localStorage.removeItem('countries');
+      localStorage.setItem('countries', JSON.stringify(state));
+      console.log(state);
+      return state;
+
+    }
+  )
 
 );
-export function reducer(state: Country[]) {
-
-}
 
 

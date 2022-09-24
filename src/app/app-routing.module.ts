@@ -12,7 +12,8 @@ const routes: Routes = [
 
 
   {path: 'countries', loadChildren: () => import('./countries/countries.module').then(m => m.CountriesModule)},
-  // {path: '**', component: PageNotFoundComponent},
+
+  { path: '**', loadChildren: () => import('./not-found/not-found.module').then(m => m.NotFoundModule) },
 
 ];
 

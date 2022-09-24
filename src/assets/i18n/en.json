@@ -50,7 +50,12 @@
     "search_by_country_name": "Search by country name",
     "regions": "Regions",
     "all_regions": "All Regions",
-    "view_details": "View Details"
+    "view_details": "View Details",
+    "africa": "Africa",
+    "americas": "Americas",
+    "asia": "Asia",
+    "europe": "Europe",
+    "oceania": "Oceania"
 
   },
 
@@ -61,6 +66,12 @@
     "continent": "Continent",
     "bordering_countries": "Bordering Countries",
     "gallery": "Gallery"
+  },
+
+  "not_found": {
+    "page_not_found": "We are sorry, Page not found!",
+    "description": "The page you are looking for might have been removed had its name changed or is temporarily unavailable.",
+    "back_home_page": "Back To Homepage"
   }
 
 
