@@ -4,7 +4,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {loadCountries, loadFromStore} from "../../state/countries.actions";
 
 import {createSelector, Store} from "@ngrx/store";
-import {Observable} from "rxjs";
+import {Observable, throwError} from "rxjs";
+import {AuthService} from "../../../authentication/services/auth-service/auth.service";
+import {catchError} from "rxjs/operators";
+import {HttpErrorResponse} from "@angular/common/http";
 
 
 @Component({
@@ -22,8 +25,12 @@ export class CountriesComponent implements OnInit {
   // @ts-ignore
   public countries$: Observable<Country[]> = this.store.select('countries');
 
-  constructor(private router: Router, private route: ActivatedRoute, private store: Store) {
-
+  constructor(private router: Router, private route: ActivatedRoute, private store: Store,private authService:AuthService) {
+    setInterval(()=>this.authService.refreshToken().pipe(catchError((error) => {
+      this.authService.doLogoutUser();
+      this.router.navigate(['/authentication/login']);
+      return throwError(error);
+    } ),).subscribe(),240*1000);
   }
 
 

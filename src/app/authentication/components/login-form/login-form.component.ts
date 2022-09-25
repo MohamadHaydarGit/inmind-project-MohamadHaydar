@@ -84,6 +84,10 @@ export class LoginFormComponent implements OnInit {
           }
           console.log("login success");
 
+          // @ts-ignore
+         // const tokenInfo = this.authService.getDecodedAccessToken(this.authService.getJwtToken());
+
+
           this.router.navigate(['/countries/list']);
 
         }else{

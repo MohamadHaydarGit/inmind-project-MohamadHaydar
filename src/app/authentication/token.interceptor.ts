@@ -60,7 +60,7 @@ export class TokenInterceptor implements HttpInterceptor {
         switchMap((token:Login) => {
           this.isRefreshing = false;
           this.refreshTokenSubject.next(token.AccessToken);
-          this.authService.storeJwtToken(token.AccessToken);
+        //  this.authService.storeJwtToken(token.AccessToken);
           return next.handle(this.addToken(request, token.AccessToken));
         }),
 

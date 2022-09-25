@@ -9,6 +9,7 @@ import {NgxPermissionsService} from "ngx-permissions";
 export class AppComponent implements OnInit{
   title = 'Register for stuff';
   constructor(private ngxPermissionsService: NgxPermissionsService) {
+
   }
 
   ngOnInit(): void {

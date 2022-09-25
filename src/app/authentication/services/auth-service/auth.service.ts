@@ -98,6 +98,7 @@ export class AuthService {
   }
 
   refreshToken() {
+    console.log('ref');
     return this.http.post<any>(this.ROOT_URL+'/RefreshToken()', {
       'refreshToken': this.getRefreshToken()
     }).pipe(tap((tokens: Login) => {
