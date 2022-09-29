@@ -27,15 +27,18 @@ export const countryReducer = createReducer(
 } ),
   on(updateCountries,(state,{country})=>{
     console.log('enter');
-      let index = state.findIndex(c => c.cca3==country.cca3);
-      state[index]=country;
-      localStorage.removeItem('countries');
-      localStorage.setItem('countries', JSON.stringify(state));
-      console.log(state);
-      return state;
+    let index = state.findIndex(c => c.cca3 == country.cca3);
+    state[index] = country;
+    localStorage.removeItem('countries');
+    localStorage.setItem('countries', JSON.stringify(state));
+    console.log(state);
+    return state;
+
+
+
 
     }
-  )
+  ),
 
 );
 

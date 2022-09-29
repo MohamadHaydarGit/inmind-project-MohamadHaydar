@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   loadCountries,
-  loadCountriesSuccess, loadFromStore,
+  loadCountriesSuccess, loadFromStore, updateCountries,
 } from './countries.actions';
 import { CountryService } from '../services/coutry-service/country.service';
-import { of, from } from 'rxjs';
 import { switchMap, map, catchError, withLatestFrom } from 'rxjs/operators';
-import {select, Store} from '@ngrx/store';
+import {Store} from '@ngrx/store';
+import {from} from "rxjs";
 
 @Injectable()
 export class CountriesEffects {
@@ -56,13 +56,15 @@ export class CountriesEffects {
     )
   );
 
-  // Run this code when the addTodo or removeTodo action is dispatched
-  //     saveTodos$ = createEffect(
+ // Run this code when the addTodo or removeTodo action is dispatched
+
+  // saveTodos$ = createEffect(
   //       () =>
   //         this.actions$.pipe(
-  //           ofType(addTodo, removeTodo),
-  //           withLatestFrom(this.store.select(selectAllTodos)),
-  //           switchMap(([action, todos]) => from(this.todoService.saveTodos(todos)))
+  //           ofType(updateCountries),
+  //           // @ts-ignore
+  //           withLatestFrom(this.store.select('countries')),
+  //           switchMap(([action, countries]) => from(this.countryService.saveCountries(todos)))
   //         ),
   //       // Most effects dispatch another action, but this one is just a "fire and forget" effect
   //       { dispatch: false }

@@ -74,7 +74,8 @@
     "new_currency": "New Currency +",
     "submit": "Submit",
     "image_list": "Image List",
-    "upload_image": "Upload Image"
+    "upload_image": "Upload Image",
+    "cancel": "Cancel"
   },
 
   "image_form": {

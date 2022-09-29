@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {config, Observable, of, throwError} from "rxjs";
-import {catchError, mapTo, tap} from "rxjs/operators";
+import {catchError, mapTo, tap, timeout} from "rxjs/operators";
 import {Login, Tokens} from "../../../models/token";
 import {SignUp} from "../../../models/signup";
 import jwt_decode from 'jwt-decode';
 import {User} from "../../../models/user";
 import {NgxPermissionsService} from "ngx-permissions";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class AuthService {
   private loggedUser: User | undefined;
   private readonly ROOT_URL = 'http://localhost:5005/api/User';
 
-  constructor(private http: HttpClient,private ngxPermissionsService: NgxPermissionsService) {}
+  constructor(private http: HttpClient,private ngxPermissionsService: NgxPermissionsService,private router:Router) {}
 
   signup(user: SignUp): Observable<boolean> {
     return this.http.post<any>(this.ROOT_URL+"/SignUp()",{
@@ -38,7 +39,7 @@ export class AuthService {
           }
         }),
         catchError((error:HttpErrorResponse) => {
-          alert(error.message);
+          console.log(error.message);
           return of(false);
         }));
   }
@@ -87,8 +88,11 @@ export class AuthService {
     }).pipe(
       tap(() => this.doLogoutUser()),
       mapTo(true),
+      timeout(3000),
       catchError((error:HttpErrorResponse) => {
-        alert(error.message);
+        this.doLogoutUser();
+        this.router.navigate(['/authentication/login']);
+        console.log(error.message);
         return of(false);
       }));
   }

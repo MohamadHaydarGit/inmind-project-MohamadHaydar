@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {isWithinPackage} from "@angular/compiler-cli/ngcc/src/analysis/util";
 import {AngularFireStorage} from "@angular/fire/storage";
@@ -10,7 +10,7 @@ import {ImageService} from "../../../services/gallery-service/image.service";
   templateUrl: './image.component.html',
   styleUrls: ['./image.component.scss']
 })
-export class ImageComponent implements OnInit {
+export class ImageComponent implements OnInit,OnChanges {
   @Input("countryName")
   public Cname:string = 's';
   formTemplate: any;
@@ -79,6 +79,15 @@ get formControls(){
     });
 
      this.resetForm();
+  }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.Cname);
+    this.formTemplate.patchValue({
+      country: this.Cname,
+    });
+   // this.getImages();
   }
 
 }

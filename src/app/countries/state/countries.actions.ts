@@ -17,5 +17,5 @@ export const loadFromStore = createAction(
 
 export const updateCountries = createAction(
   '[Country API] Update Country',
-        props<{ country: any }>()
+  props<{ country: Country }>()
 );

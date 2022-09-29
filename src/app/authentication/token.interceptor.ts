@@ -53,6 +53,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
       return this.authService.refreshToken().pipe(
         catchError((error:HttpErrorResponse) => {
+
           this.authService.doLogoutUser();
           this.router.navigate(['/authentication/login']);
           return throwError(error);

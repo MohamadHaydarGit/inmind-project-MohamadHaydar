@@ -21,7 +21,26 @@
     </div>
     <div id="details-admin" class="details" *ngxPermissionsOnly="'ADMIN'">
 
-      <div class="container">
+      <div [ngSwitch]="edit" class="container">
+
+        <div  class="details" *ngSwitchCase="'view'">
+          <p>{{t('details.capital_city')}} : {{country!.capital}}</p>
+          <p>{{t('details.currency')}} : <span
+            *ngFor="let curr of country!.currencies! | keys; let i = index">{{curr.name}}{{i === getCurrenciesLength() - 1 ? '' : ',&nbsp;' }}</span>
+          </p>
+          <p>{{t('details.language')}} :<span
+            *ngFor="let lang of country!.languages | keyvalue; let i = index">{{lang.value}}{{i === getLangLength() - 1 ? '' : ',&nbsp;' }}</span>
+          </p>
+          <p>{{t('details.continent')}} :{{country!.continents}}</p>
+          <!--    <p>Regional Bloc :{{country!.regionalBloc}}</p>-->
+
+          <button class="btn btn-secondary" (click)="viewEdit()">Edit</button>
+
+        </div>
+
+
+
+      <div class="container" *ngSwitchCase="'edit'">
         <div class="row">
           <div class="col-md-12">
             <div class="margin-20">
@@ -103,9 +122,12 @@
                 </a>
               </div>
 
-              <div class="margin-20">
+              <div class="margin-20" style="display: flex;justify-content: space-around">
                 <button type="submit" class="btn btn-secondary pull-right">{{t('details.submit')}}</button>
+
+                <button (click)="cancel()" class="btn btn-secondary pull-right">{{t('details.cancel')}}</button>
               </div>
+
               <div class="clearfix"></div>
 
               <!--            <div class="margin-20">-->
@@ -115,6 +137,9 @@
           </div>
         </div>
       </div>
+
+      </div>
+
 
     </div>
     <div id="bordering">

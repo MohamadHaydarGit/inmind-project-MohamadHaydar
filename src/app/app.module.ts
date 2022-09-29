@@ -14,6 +14,7 @@ import {CountriesEffects} from "./countries/state/countries.effects";
 import {Translation, translocoConfig, TranslocoLoader, TRANSLOCO_CONFIG, TRANSLOCO_LOADER} from "@ngneat/transloco";
 import {environment} from "../environments/environment";
 import {TranslocoRootModule} from "./transloco-root.module";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {TranslocoRootModule} from "./transloco-root.module";
     NgxPermissionsModule.forRoot(),
     StoreModule.forRoot({countries:countryReducer}),
     EffectsModule.forRoot([CountriesEffects]),
-    TranslocoRootModule
+    TranslocoRootModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},{
     provide: HTTP_INTERCEPTORS,

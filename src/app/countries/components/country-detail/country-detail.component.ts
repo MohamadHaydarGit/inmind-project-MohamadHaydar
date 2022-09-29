@@ -24,6 +24,13 @@ export class CountryDetailComponent implements OnInit {
   borders: Country[] = [];
   formGroup: any;
   userType: string = "upload";
+  edit: string = "view";
+
+  public viewEdit() {
+    if (this.edit == "view") {
+      this.edit = "edit";
+    }
+  }
 
   //We're accessing the store from ngrx , and then selecting countries which is defined as a  property from app.module.ts
   // in StoreModule.forRoot({}). This calls the countries reducer and returns the countries state.
@@ -36,7 +43,7 @@ export class CountryDetailComponent implements OnInit {
     private countryService: CountryService,
     private formBuilder: FormBuilder,
     private service: ImageService,
-    private store: Store,
+    private store: Store<{countries:Country[]}>,
   ) {
   }
 
@@ -122,7 +129,7 @@ export class CountryDetailComponent implements OnInit {
 
 
   initCurrency() {
-  //initCurrency returns a group that contains the first language spoken in the country (assumin there is more)
+    //initCurrency returns a group that contains the first language spoken in the country (assumin there is more)
 
     // @ts-ignore
     let keyArr: any[] = Object.keys(this.country?.currencies),
@@ -194,16 +201,29 @@ export class CountryDetailComponent implements OnInit {
     console.log(formData);
     console.log(this.country);
     var object = formData['language'].reduce(
-      (obj: any, item: { code: string; lang: string; }) => Object.assign(obj, { [item.code]: item.lang }), {});
+      (obj: any, item: { code: string; lang: string; }) => Object.assign(obj, {[item.code]: item.lang}), {});
 
     console.log(object);
 
-   // @ts-ignore
-   this.countryCopy = {...this.country};
+    // @ts-ignore
+    this.countryCopy = {...this.country};
 
-   // @ts-ignore
-   this.countryCopy?.languages=object;
-   this.store.dispatch(updateCountries({country: this.countryCopy}));
+    // @ts-ignore
+    this.countryCopy?.languages = object;
+    console.log(this.countryCopy?.languages);
+    this.updateCountries(this.countryCopy!);
+    window.location.reload()
+    console.log('end');
+    this.edit="view";
+  }
+
+   updateCountries(country: Country) {
+
+    this.store.dispatch(updateCountries({country: this.countryCopy!}));
+  }
+
+  cancel(){
+    this.edit= "view";
   }
 
   getLangLength() {
